@@ -673,8 +673,18 @@ def _refila_erros():
         log.info("casamento: %s compras com erro voltaram para a fila", n)
 
 
+def _limpar_quizzes():
+    """Respostas do quiz que não viraram compra em 60 dias são apagadas (é o que diz a política de privacidade do site)."""
+    limite = (dt.datetime.now() - dt.timedelta(days=60)).isoformat(timespec="seconds")
+    with S._lock, S.db() as c:
+        n = c.execute("DELETE FROM casamento_pedidos WHERE criado < ? AND ref NOT IN (SELECT ref FROM casamento_compras WHERE ref IS NOT NULL)",
+                      (limite,)).rowcount
+    if n:
+        log.info("casamento: %s respostas antigas do quiz apagadas", n)
+
+
 def _trabalhador():
-    ultimo = 0
+    ultimo = limpeza = 0
     while True:
         try:
             if not processar_um():
@@ -682,6 +692,8 @@ def _trabalhador():
             if time.time() - ultimo > 60:
                 ultimo = time.time()
                 lembretes(); recuperar(); _refila_erros()
+            if time.time() - limpeza > 6 * 3600:
+                limpeza = time.time(); _limpar_quizzes()
         except Exception:
             log.exception("casamento: erro no trabalhador"); time.sleep(5)
 

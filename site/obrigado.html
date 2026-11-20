@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pagamento recebido · O Santo do Nosso Casamento</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1636">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script src="config.js"></script>
+<script src="comum.js"></script>
+</head>
+<body>
+<div class="topo">✝ MEU SANTO PROTETOR ✝</div>
+<div class="wrap">
+  <div class="ok-topo">
+    <div class="sel">✅</div>
+    <h1>Pedido recebido!</h1>
+    <p style="margin:0;color:var(--suave)" id="sub">O livro <b id="nomes-casal">do casal</b> já está sendo preparado.</p>
+  </div>
+
+  <!-- upsell de 1 clique (só aparece com o UPSELL_ID no config.js) -->
+  <div class="cartao upsell escondido" id="upsell">
+    <div class="k">ANTES DE IR · SÓ NESTA PÁGINA</div>
+    <h2 style="text-align:center">E o santo de cada pessoa da sua casa?</h2>
+    <p>Você descobriu o santo do casamento. Em <b>Os Santos Protetores da Sua Família</b>, cada filho, neto e pessoa querida (até 8 pessoas) ganha a página
+       do santo do dia em que nasceu, com a história, uma oração pelo nome e o santinho para recortar. Tem também a novena da família e a consagração do lar.</p>
+    <p style="margin:0">E vem com <b>o seu devocionário de bônus</b>: o santo do dia em que você nasceu, com a sua oração e a novena.</p>
+    <div class="preco-up"><span>O preço normal é <s>R$ <span id="up-cheio"></span></s></span><b>R$ <span id="up-preco"></span></b>
+      <span style="font-size:14px;color:var(--suave)">nesta página, uma vez só</span></div>
+    <div id="up-botoes"></div>
+    <p style="font-size:13.5px;color:var(--suave);text-align:center;margin:10px 0 0" id="up-nota">Com um clique: o pagamento usa o mesmo cartão da compra anterior.</p>
+    <div style="text-align:center"><button class="link" id="up-nao">Não, obrigado. Quero ver o meu livro</button></div>
+  </div>
+
+  <!-- andamento do livro -->
+  <div class="cartao status escondido" id="status">
+    <div id="st-gerando">
+      <div class="spin"></div>
+      <h2>Estamos preparando o seu livro</h2>
+      <p id="st-msg">Leva de 1 a 3 minutos. Pode deixar esta página aberta: quando ficar pronto, o botão para baixar aparece aqui. Ele também chega no seu e-mail.</p>
+    </div>
+    <div id="st-pronto" class="escondido">
+      <div style="font-size:38px">🙏</div>
+      <h2>O livro está pronto!</h2>
+      <p>Também mandamos para o seu e-mail. Salve no celular para rezar todos os dias, ou imprima em A4.</p>
+      <div class="downloads" id="downloads"></div>
+    </div>
+    <div id="st-email" class="escondido">
+      <h2>O livro vai chegar no seu e-mail</h2>
+      <p>Assim que o pagamento for confirmado (no Pix é na hora; no cartão, em alguns minutos), o livro é preparado e chega no e-mail que você usou na compra.
+         Confira também a caixa de spam e a aba Promoções.</p>
+      <div class="campo" style="text-align:left"><label for="em">Não chegou em 15 minutos? Peça de novo:</label>
+        <input type="email" id="em" placeholder="o e-mail da compra" autocomplete="email"></div>
+      <button class="btn claro" id="reenviar">Mandar o livro de novo</button>
+      <p id="reenviado" class="escondido" style="margin-top:12px">Pronto! Se houver uma compra com esse e-mail, o livro chega em instantes.</p>
+    </div>
+  </div>
+
+  <p class="transparencia">Dúvidas? Escreva para <a id="contato" href="#"></a>. Material devocional católico do Meu Santo Protetor.</p>
+</div>
+
+<script>
+(function () {
+  var C = CAS.C, $ = function (id) { return document.getElementById(id); };
+  CAS.pixel();
+  $("contato").href = "mailto:" + C.CONTATO; $("contato").textContent = C.CONTATO;
+  var q = new URLSearchParams(location.search);
+  var ref = q.get("ref") || CAS.ls("cas_ref") || "";
+  var nomes = CAS.ls("cas_nomes"); if (nomes) $("nomes-casal").textContent = "de " + nomes;
+
+  function mostraStatus() {
+    $("upsell").classList.add("escondido"); $("status").classList.remove("escondido");
+    if (!/^ca-[0-9a-f]{12}$/.test(ref)) { $("st-gerando").classList.add("escondido"); $("st-email").classList.remove("escondido"); return; }
+    var n = 0;
+    (function pergunta() {
+      CAS.api("/api/casamento/status?ref=" + ref, {}, 10000).then(function (j) {
+        if (j.pronto && j.arquivos) {
+          $("st-gerando").classList.add("escondido"); $("st-pronto").classList.remove("escondido");
+          $("downloads").innerHTML = j.arquivos.map(function (a, i) {
+            return '<a class="btn ' + (i ? "claro" : "azul") + '" href="' + CAS.esc(a.url) + '" target="_blank" rel="noopener">Baixar: ' + CAS.esc(a.titulo) + '</a>'; }).join("");
+          return;
+        }
+        if (!j.pago && n > 6) $("st-msg").textContent = "Estamos esperando a confirmação do pagamento. No Pix é na hora; no cartão pode levar alguns minutos. Assim que confirmar, o livro aparece aqui e chega no seu e-mail.";
+        if (++n < 75) setTimeout(pergunta, 4000);
+        else { $("st-gerando").classList.add("escondido"); $("st-email").classList.remove("escondido"); }
+      }).catch(function () { if (++n < 75) setTimeout(pergunta, 6000); });
+    })();
+  }
+
+  $("reenviar").onclick = function () {
+    var e = $("em").value.trim(); if (e.indexOf("@") < 1) { $("em").focus(); return; }
+    CAS.api("/api/casamento/reenviar", { body: { email: e } }).finally(function () { $("reenviado").classList.remove("escondido"); });
+  };
+
+  // upsell de 1 clique da Kiwify (Os Santos Protetores da Sua Família)
+  if (C.UPSELL_ID && /^ca-[0-9a-f]{12}$/.test(ref)) {
+    $("up-preco").textContent = C.PRECO_UPSELL; $("up-cheio").textContent = C.PRECO_CHEIO_UPSELL;
+    var h = '<button class="btn azul" id="kiwify-upsell-trigger-' + CAS.esc(C.UPSELL_ID) + '">Sim, quero o santo de cada pessoa da casa</button>';
+    if (C.CHECKOUT_UPSELL) h += '<a class="btn claro" style="margin-top:10px" href="' + CAS.esc(C.CHECKOUT_UPSELL) + '" target="_blank" rel="noopener">Paguei no Pix: quero pagar esta oferta no Pix</a>';
+    $("up-botoes").innerHTML = h;
+    var s = document.createElement("script"); s.src = C.UPSELL_SCRIPT; s.async = true; document.body.appendChild(s);
+    $("upsell").classList.remove("escondido"); CAS.track("Upsell");
+    document.getElementById("kiwify-upsell-trigger-" + C.UPSELL_ID).addEventListener("click", function () {
+      CAS.track("UpsellSim"); this.textContent = "Processando…";
+      setTimeout(mostraStatus, 7000);  // depois do 1 clique, mostra o andamento do livro
+    });
+    $("up-nao").onclick = function () { CAS.track("UpsellNao"); mostraStatus(); window.scrollTo(0, 0); };
+  } else {
+    mostraStatus();
+  }
+})();
+</script>
+</body>
+</html>

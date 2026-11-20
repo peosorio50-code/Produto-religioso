@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>O Santo do Nosso Casamento · Meu Santo Protetor</title>
+<meta name="description" content="Todo casamento acontece no dia de um santo. Descubra, de graça, o santo que a Igreja recordava no dia em que vocês disseram sim.">
+<meta property="og:title" content="O Santo do Nosso Casamento">
+<meta property="og:description" content="Todo casamento acontece no dia de um santo. Descubra o santo do dia do seu casamento.">
+<meta property="og:image" content="img/amostra-capa.jpg">
+<meta name="theme-color" content="#0B1636">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script src="config.js"></script>
+<script src="comum.js"></script>
+</head>
+<body>
+<div class="topo">✝ MEU SANTO PROTETOR ✝</div>
+
+<!-- ============ INÍCIO ============ -->
+<section id="inicio">
+  <div class="hero">
+    <div class="wrap">
+      <svg class="simbolo" viewBox="0 0 150 150" aria-hidden="true" id="simbolo"></svg>
+      <h1>Todo casamento acontece<br>no <em>dia de um santo</em>.</h1>
+      <p class="sub">Descubra, de graça, o santo que a Igreja recordava no dia em que vocês disseram sim.</p>
+      <button class="btn" id="comecar">Descobrir o santo do nosso casamento</button>
+      <div class="nota">Leva 1 minuto · grátis · serve também para dar de presente</div>
+    </div>
+  </div>
+  <div class="wrap passos3">
+    <h2 class="secao">Como funciona</h2>
+    <ol>
+      <li><b>Conte o dia do casamento.</b> Os nomes do casal e a data em que disseram sim.</li>
+      <li><b>Descubra o santo do dia.</b> Na hora, de graça: o santo (ou a festa) que a Igreja celebrava naquele dia.</li>
+      <li><b>Se quiser, leve o livro de orações do casal.</b> Feito com o nome dos dois, chega no seu e-mail em poucos minutos.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz" class="escondido">
+  <div class="wrap quiz">
+    <div class="barra"><i id="progresso"></i></div>
+    <div id="etapa"></div>
+  </div>
+</section>
+
+<!-- ============ CARREGANDO ============ -->
+<section id="carregando" class="escondido">
+  <div class="wrap carregando">
+    <div class="chama"></div><div class="vela"></div>
+    <p id="msg-carregando">Procurando no calendário dos santos…</p>
+  </div>
+</section>
+
+<!-- ============ REVELAÇÃO ============ -->
+<section id="revelacao" class="escondido">
+  <div class="revela">
+    <div class="wrap">
+      <div class="k" id="rev-k">VOCÊS SE CASARAM NO DIA DE</div>
+      <div class="santinho">
+        <svg width="70" height="70" viewBox="0 0 150 150" aria-hidden="true" class="simb2"></svg>
+        <div class="nome" id="rev-nome"></div>
+        <div class="quem" id="rev-quem"></div>
+        <div class="dt" id="rev-data"></div>
+      </div>
+      <p class="frase" id="rev-frase"></p>
+      <div class="cada escondido" id="rev-cada"></div>
+      <p class="anos" id="rev-anos"></p>
+      <div class="seta" id="rev-seta">Preparamos algo para vocês<span>↓</span></div>
+    </div>
+  </div>
+
+  <!-- ============ OFERTA ============ -->
+  <div class="wrap oferta" id="oferta">
+    <div class="livro3d"><div class="capa">
+      <div class="m">✝ MEU SANTO PROTETOR ✝</div>
+      <div class="t">O Santo do<br>Nosso Casamento</div>
+      <div class="n" id="of-nomes"></div>
+      <div class="s" id="of-santo"></div>
+    </div></div>
+    <h2 id="of-titulo">O livro de orações do casal</h2>
+    <p class="sub" id="of-sub">Feito com o nome de vocês dois e com o santo do dia do casamento, para rezarem juntos e guardarem para sempre.</p>
+    <ul class="itens" id="of-itens"></ul>
+
+    <h2 class="secao" style="margin-top:6px">Veja como é por dentro</h2>
+    <div class="amostras">
+      <figure><img src="img/amostra-capa.jpg" alt="Capa do livro com os nomes do casal" loading="lazy" width="620" height="878"><figcaption>A capa, com os nomes de vocês</figcaption></figure>
+      <figure><img src="img/amostra-santo.jpg" alt="Página do santo do dia do casamento" loading="lazy" width="620" height="878"><figcaption>O santo do dia do casamento</figcaption></figure>
+      <figure><img src="img/amostra-oracao.jpg" alt="A oração do casal" loading="lazy" width="620" height="878"><figcaption>A oração do casal, com os dois nomes</figcaption></figure>
+      <figure><img src="img/amostra-novena.jpg" alt="Novena do casal" loading="lazy" width="620" height="878"><figcaption>A novena: 9 dias para rezar juntos</figcaption></figure>
+      <figure><img src="img/amostra-calendario.jpg" alt="Calendário do casal 2027" loading="lazy" width="620" height="878"><figcaption>O calendário do casal em 2027</figcaption></figure>
+      <figure><img src="img/amostra-quadro.jpg" alt="Quadro para imprimir com os nomes do casal" loading="lazy" width="620" height="878"><figcaption>O quadro para imprimir e emoldurar</figcaption></figure>
+    </div>
+    <p class="legenda-ex">Páginas de um livro de exemplo (Ana e José). O de vocês sai com os seus nomes, a sua data e o seu santo.</p>
+
+    <div class="preco" id="bloco-preco">
+      <div style="font-size:15px;color:var(--suave)">O livro de <b id="pr-nomes"></b></div>
+      <div class="valor"><small>R$</small> <span id="pr-valor"></span></div>
+      <div class="det">pagamento único · Pix ou cartão · PDF para ler no celular ou imprimir</div>
+      <button class="btn azul" id="comprar">Quero o livro</button>
+      <div class="erro" id="erro-compra" style="text-align:center"></div>
+      <p class="feito">Chega no seu e-mail em poucos minutos, com o nome de vocês em cada oração.</p>
+    </div>
+    <div class="garantia"><div class="sel">🛡️</div><div><b>Garantia de 7 dias.</b> Se não for o que você esperava, é só pedir pela Kiwify que devolvemos o seu dinheiro, sem perguntas.</div></div>
+    <p class="transparencia">Material devocional católico do Meu Santo Protetor. Não somos uma paróquia: nada substitui a missa, os sacramentos e a orientação do padre. Os santos intercedem por nós; quem concede as graças é Deus.</p>
+
+    <h2 class="secao">Perguntas frequentes</h2>
+    <div class="faq">
+      <details><summary>Como eu recebo o livro?</summary><p>Assim que o pagamento é aprovado (no Pix é na hora), o livro é preparado com os dados que você informou e chega no seu e-mail em poucos minutos, em PDF. Na própria página depois da compra também aparece o botão para baixar.</p></details>
+      <details><summary>Serve para dar de presente?</summary><p>Serve, e é um ótimo presente de bodas ou de aniversário de casamento para os pais, os padrinhos ou um casal amigo. No começo do quiz, escolha "dar de presente": o livro sai com o nome do casal e uma dedicatória sua.</p></details>
+      <details><summary>Nos casamos só no civil. Serve?</summary><p>Serve. O livro é feito para todo casal que quer rezar junto. Há uma página com uma palavra sobre o sacramento do Matrimônio, para quando vocês quiserem conversar com o padre.</p></details>
+      <details><summary>E se o santo do dia não for conhecido?</summary><p>Todo dia do ano a Igreja recorda um santo ou celebra uma festa. Usamos o calendário da Igreja e contamos só o que é certo sobre cada santo: quando não há muitos fatos conhecidos, o livro fala do exemplo e da virtude dele.</p></details>
+      <details><summary>Posso imprimir?</summary><p>Pode. As páginas estão no tamanho A4 e o quadro com os nomes do casal foi feito para emoldurar. Muitas papelarias imprimem e encadernam.</p></details>
+      <details><summary>Vocês são da Igreja?</summary><p>Somos o Meu Santo Protetor, uma equipe que prepara material devocional católico. Não somos uma paróquia e nada substitui a missa, os sacramentos e a orientação do padre. O livro segue a fé católica: os santos rezam por nós e quem concede as graças é Deus.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Meu Santo Protetor · material devocional católico</div>
+  <div><a href="privacidade.html">Privacidade</a> · <a id="contato" href="#">Contato</a></div>
+</footer>
+
+<script>
+(function () {
+  var C = CAS.C, esc = CAS.esc, $ = function (id) { return document.getElementById(id); };
+  var SIMB = '<g stroke="#C9A052" fill="none">' + (function () { var r = ""; for (var i = 0; i < 36; i++) { var a = i * Math.PI / 18, c1 = 44, c2 = i % 2 ? 72 : 64;
+      r += '<line x1="' + (75 + c1 * Math.cos(a)).toFixed(1) + '" y1="' + (82 + c1 * Math.sin(a)).toFixed(1) + '" x2="' + (75 + c2 * Math.cos(a)).toFixed(1) + '" y2="' + (82 + c2 * Math.sin(a)).toFixed(1) + '" stroke-width="' + (i % 2 ? 1.2 : .7) + '" opacity=".6"/>'; } return r; })()
+    + '<circle cx="62" cy="90" r="22" stroke-width="5"/><circle cx="88" cy="90" r="22" stroke-width="5"/><path d="M75 30 v32 M64 41 h22" stroke-width="4.5" stroke-linecap="round"/></g>';
+  $("simbolo").innerHTML = SIMB; document.querySelector(".simb2").innerHTML = SIMB;
+  $("contato").href = "mailto:" + C.CONTATO;
+  CAS.pixel(); CAS.track("Entrou");
+
+  var HOJE = new Date(), ANO = HOJE.getFullYear();
+  var Q = { modo: "", quem: "", presenteador: "", ela: { nome: "", dia: "", mes: "" }, ele: { nome: "", dia: "", mes: "" },
+            casamento: { dia: "", mes: "", ano: "" }, igreja: "", pedidos: [], pedido: "", dedicatoria: "" };
+  var PEDIDOS = [["paciencia", "🕊️", "Mais paciência e diálogo"], ["uniao", "🤍", "Mais união e carinho"], ["fase", "⛰️", "Força numa fase difícil"],
+                 ["fe", "✝️", "FE"], ["saude", "🌿", "A saúde da família"], ["filhos", "👨‍👩‍👧", "Os filhos"],
+                 ["financas", "🏠", "O trabalho e as contas da casa"], ["gratidao", "🙏", "Agradecer pelos anos juntos"]];
+  var nos = function () { return Q.modo !== "presente"; };
+
+  function opcoes(lista, atual, multi) {
+    return '<div class="opcoes">' + lista.map(function (o) {
+      var sel = multi ? atual.indexOf(o[0]) >= 0 : atual === o[0];
+      return '<button type="button" class="opcao' + (sel ? " sel" : "") + '" data-v="' + o[0] + '"><span class="ic">' + o[1] + '</span><span>' + esc(o[2]) + '</span></button>';
+    }).join("") + '</div>';
+  }
+  function selDia(id, v) { var h = '<select id="' + id + '"><option value="">Dia</option>'; for (var d = 1; d <= 31; d++) h += '<option' + (+v === d ? " selected" : "") + '>' + d + '</option>'; return h + '</select>'; }
+  function selMes(id, v) { return '<select id="' + id + '"><option value="">Mês</option>' + CAS.MESES.map(function (m, i) { return '<option value="' + (i + 1) + '"' + (+v === i + 1 ? " selected" : "") + '>' + m + '</option>'; }).join("") + '</select>'; }
+  function dataValida(d, m, a) { var x = new Date(a || 2000, m - 1, d); return d && m && x.getDate() === +d && x.getMonth() === m - 1; }
+
+  var ETAPAS = [
+    { id: "modo", html: function () { return '<h2 class="pergunta">Para quem é?</h2><p class="ajuda">Você pode descobrir o santo do seu casamento ou do casamento de alguém que você ama.</p>'
+        + opcoes([["nos", "💍", "Para o meu casamento"], ["presente", "🎁", "Para dar de presente a um casal"]], Q.modo); },
+      clique: function (v) { Q.modo = v; return true; } },
+    { id: "quem", html: function () {
+        if (nos()) return '<h2 class="pergunta">Quem está respondendo?</h2><p class="ajuda">Para escrevermos as orações do jeito certo.</p>'
+          + opcoes([["ela", "👩", "Eu sou a esposa"], ["ele", "👨", "Eu sou o marido"]], Q.quem);
+        return '<h2 class="pergunta">Qual é o seu nome?</h2><p class="ajuda">Vai na dedicatória do presente.</p>'
+          + '<div class="campo"><input type="text" id="f-pres" maxlength="40" autocomplete="given-name" placeholder="Seu primeiro nome" value="' + esc(Q.presenteador) + '"></div>'; },
+      clique: function (v) { Q.quem = v; return true; },
+      ok: function () { if (nos()) return Q.quem ? "" : "Escolha uma opção."; Q.presenteador = $("f-pres").value.trim(); return Q.presenteador.length >= 2 ? "" : "Escreva o seu nome."; },
+      botao: function () { return !nos(); } },
+    { id: "nomes", html: function () {
+        var l1 = nos() ? (Q.quem === "ela" ? "O seu nome" : "O nome da sua esposa") : "O nome da esposa";
+        var l2 = nos() ? (Q.quem === "ele" ? "O seu nome" : "O nome do seu marido") : "O nome do marido";
+        return '<h2 class="pergunta">Os nomes do casal</h2><p class="ajuda">Só o primeiro nome, do jeito que vocês se chamam.</p>'
+          + '<div class="campo"><label for="f-ela">' + l1 + '</label><input type="text" id="f-ela" maxlength="40" autocomplete="off" value="' + esc(Q.ela.nome) + '"></div>'
+          + '<div class="campo"><label for="f-ele">' + l2 + '</label><input type="text" id="f-ele" maxlength="40" autocomplete="off" value="' + esc(Q.ele.nome) + '"></div>'; },
+      ok: function () { Q.ela.nome = $("f-ela").value.trim(); Q.ele.nome = $("f-ele").value.trim();
+        return Q.ela.nome.length >= 2 && Q.ele.nome.length >= 2 ? "" : "Escreva os dois nomes."; }, botao: function () { return true; } },
+    { id: "data", html: function () {
+        return '<h2 class="pergunta">Em que dia ' + (nos() ? "vocês se casaram" : "eles se casaram") + '?</h2><p class="ajuda">É por essa data que descobrimos o santo do casamento.</p>'
+          + '<div class="linha3">' + selDia("f-cd", Q.casamento.dia) + selMes("f-cm", Q.casamento.mes)
+          + '<input type="tel" inputmode="numeric" id="f-ca" maxlength="4" placeholder="Ano" value="' + esc(Q.casamento.ano) + '"></div>'; },
+      ok: function () { var d = +$("f-cd").value, m = +$("f-cm").value, a = +$("f-ca").value;
+        Q.casamento = { dia: d, mes: m, ano: a };
+        if (!d || !m) return "Escolha o dia e o mês.";
+        if (!a || a < 1940 || a > ANO) return "Escreva o ano com 4 números (ex.: 1998).";
+        if (!dataValida(d, m, a) || new Date(a, m - 1, d) > HOJE) return "Essa data não existe. Confira o dia e o mês.";
+        return ""; }, botao: function () { return true; } },
+    { id: "igreja", html: function () {
+        var l = [["sim", "⛪", "Sim, na Igreja"], ["civil", "📜", "Só no civil (ainda não na Igreja)"]];
+        if (!nos()) l.push(["nao_sei", "🤔", "Não sei"]);
+        return '<h2 class="pergunta">' + (nos() ? "Vocês se casaram na Igreja?" : "Eles se casaram na Igreja?") + '</h2><p class="ajuda">O livro serve para os dois casos; só muda uma página.</p>' + opcoes(l, Q.igreja); },
+      clique: function (v) { Q.igreja = v; return true; } },
+    { id: "pedidos", html: function () {
+        var fe = nos() ? (Q.quem === "ele" ? "A fé da minha esposa" : "A fé do meu marido") : "A fé do casal";
+        var l = PEDIDOS.map(function (p) { return [p[0], p[1], p[2] === "FE" ? fe : p[2]]; });
+        return '<h2 class="pergunta">O que ' + (nos() ? "vocês mais querem" : "você mais quer") + ' entregar a Deus pelo casamento?</h2><p class="ajuda">Escolha até 3. Entra na oração do casal e na novena.</p>' + opcoes(l, Q.pedidos, true); },
+      clique: function (v, b) { var i = Q.pedidos.indexOf(v);
+        if (i >= 0) { Q.pedidos.splice(i, 1); b.classList.remove("sel"); } else if (Q.pedidos.length < 3) { Q.pedidos.push(v); b.classList.add("sel"); }
+        return false; },
+      ok: function () { return Q.pedidos.length ? "" : "Escolha pelo menos uma opção."; }, botao: function () { return true; } },
+    { id: "aniversarios", html: function () {
+        return '<h2 class="pergunta">E o santo de cada um?</h2><p class="ajuda">Opcional: com o dia e o mês do aniversário de cada um, mostramos também o santo de cada um.</p>'
+          + '<div class="bloco-opc"><h4>Aniversário de ' + esc(CAS.primeiro(Q.ela.nome)) + '</h4><div class="linha2">' + selDia("f-ed", Q.ela.dia) + selMes("f-em", Q.ela.mes) + '</div></div>'
+          + '<div class="bloco-opc"><h4>Aniversário de ' + esc(CAS.primeiro(Q.ele.nome)) + '</h4><div class="linha2">' + selDia("f-hd", Q.ele.dia) + selMes("f-hm", Q.ele.mes) + '</div></div>'; },
+      ok: function () {
+        var p = [["ela", "f-ed", "f-em"], ["ele", "f-hd", "f-hm"]];
+        for (var i = 0; i < 2; i++) { var d = +$(p[i][1]).value, m = +$(p[i][2]).value; Q[p[i][0]].dia = d || ""; Q[p[i][0]].mes = m || "";
+          if ((d || m) && !dataValida(d, m)) return "Confira o aniversário de " + CAS.primeiro(Q[p[i][0]].nome) + " (dia e mês)."; }
+        return ""; }, botao: function () { return true; }, pular: true },
+    { id: "pedido", html: function () {
+        var h = '<h2 class="pergunta">Quer contar algo mais?</h2><p class="ajuda">Opcional. Um pedido, um momento que ' + (nos() ? "vocês estão" : "o casal está") + ' vivendo. Usamos com discrição na oração do casal.</p>'
+          + '<div class="campo"><textarea id="f-ped" maxlength="300" placeholder="Ex.: que a gente tenha mais paciência um com o outro">' + esc(Q.pedido) + '</textarea><div class="contador"><span id="cont">0</span>/300</div></div>';
+        if (!nos()) h += '<div class="campo"><label for="f-ded">Dedicatória para o casal (opcional)</label><textarea id="f-ded" maxlength="300" placeholder="Ex.: Para os meus pais, com todo o meu amor.">' + esc(Q.dedicatoria) + '</textarea></div>';
+        return h; },
+      depois: function () { var t = $("f-ped"), c = $("cont"); var f = function () { c.textContent = t.value.length; }; t.oninput = f; f(); },
+      ok: function () { Q.pedido = $("f-ped").value.trim(); if ($("f-ded")) Q.dedicatoria = $("f-ded").value.trim(); return ""; },
+      botao: function () { return true; }, textoBotao: "Revelar o santo do casamento" }
+  ];
+
+  var atual = 0;
+  function mostra(sec) { ["inicio", "quiz", "carregando", "revelacao"].forEach(function (s) { $(s).classList.toggle("escondido", s !== sec); }); window.scrollTo(0, 0); }
+  function render() {
+    var e = ETAPAS[atual];
+    $("progresso").style.width = Math.round(100 * atual / ETAPAS.length) + "%";
+    var h = e.html() + '<div class="erro" id="erro"></div><div class="acoes">';
+    if (e.botao && e.botao()) h += '<button class="btn" id="seguir">' + (e.textoBotao || "Continuar") + '</button>';
+    if (e.pular) h += '<div style="text-align:center"><button class="link" id="pular">Pular esta etapa</button></div>';
+    h += '</div>' + (atual > 0 ? '<button class="link voltar" id="voltar">← Voltar</button>' : "");
+    $("etapa").innerHTML = h;
+    if (e.depois) e.depois();
+    Array.prototype.forEach.call(document.querySelectorAll("#etapa .opcao"), function (b) {
+      b.onclick = function () {
+        if (e.clique(b.getAttribute("data-v"), b) === true) {
+          Array.prototype.forEach.call(document.querySelectorAll("#etapa .opcao"), function (x) { x.classList.toggle("sel", x === b); });
+          setTimeout(avanca, 180);
+        }
+      };
+    });
+    if ($("seguir")) $("seguir").onclick = function () { var m = e.ok ? e.ok() : ""; if (m) { $("erro").textContent = m; return; } avanca(); };
+    if ($("pular")) $("pular").onclick = function () { Q.ela.dia = Q.ela.mes = Q.ele.dia = Q.ele.mes = ""; avanca(); };
+    if ($("voltar")) $("voltar").onclick = function () { atual--; render(); };
+    var inp = document.querySelector("#etapa input[type=text]"); if (inp && !inp.value) setTimeout(function () { inp.focus(); }, 60);
+  }
+  function avanca() { if (atual < ETAPAS.length - 1) { atual++; render(); window.scrollTo(0, 0); } else revelar(); }
+
+  $("comecar").onclick = function () { CAS.track("QuizInicio"); mostra("quiz"); render(); };
+
+  var SANTOS = null;
+  function revelar() {
+    mostra("carregando");
+    var cz = Q.casamento, ds = [CAS.dd(cz.dia) + CAS.dd(cz.mes)];
+    if (Q.ela.dia) ds.push(CAS.dd(Q.ela.dia) + CAS.dd(Q.ela.mes));
+    if (Q.ele.dia) ds.push(CAS.dd(Q.ele.dia) + CAS.dd(Q.ele.mes));
+    var t0 = Date.now();
+    var msgs = ["Procurando no calendário dos santos…", "Encontramos o dia " + CAS.dataPt(cz.dia, cz.mes) + "…"];
+    setTimeout(function () { $("msg-carregando").textContent = msgs[1]; }, 1200);
+    CAS.api("/api/casamento/santos?d=" + ds.join(","), {}, 10000).then(function (j) {
+      if (!j.santos) throw new Error("sem santos");
+      SANTOS = j.santos;
+      setTimeout(mostraRevelacao, Math.max(0, 2300 - (Date.now() - t0)));
+    }).catch(function () {
+      $("msg-carregando").innerHTML = 'Não conseguimos consultar o calendário agora.<br><button class="btn" style="margin-top:18px" id="denovo">Tentar de novo</button>';
+      $("denovo").onclick = revelar;
+    });
+  }
+
+  function mostraRevelacao() {
+    var ela = CAS.primeiro(Q.ela.nome), ele = CAS.primeiro(Q.ele.nome), cz = Q.casamento, s = SANTOS[0];
+    $("rev-k").textContent = s.festa ? (nos() ? "VOCÊS SE CASARAM NUM DIA DE FESTA DA IGREJA" : "ELES SE CASARAM NUM DIA DE FESTA DA IGREJA")
+                                     : (nos() ? "VOCÊS SE CASARAM NO DIA DE" : "ELES SE CASARAM NO DIA DE");
+    $("rev-nome").textContent = s.nome; $("rev-quem").textContent = s.quem || ""; $("rev-data").textContent = CAS.dataPt(cz.dia, cz.mes, cz.ano).toUpperCase();
+    $("rev-frase").innerHTML = (s.festa ? "Santa Maria, Mãe de Deus, rogai por " : esc(s.nome) + ", rogai por ") + "<b>" + esc(ela) + "</b> e por <b>" + esc(ele) + "</b>.";
+    var extra = SANTOS.slice(1), quem = [];
+    if (Q.ela.dia) quem.push(ela); if (Q.ele.dia) quem.push(ele);
+    if (extra.length) {
+      $("rev-cada").innerHTML = extra.map(function (x, i) { return '<div><small>' + esc(quem[i].toUpperCase()) + '</small><b>' + esc(x.nome) + '</b></div>'; }).join("");
+      $("rev-cada").classList.remove("escondido");
+    }
+    var anos = 2027 - cz.ano, bodas = CAS.BODAS[anos];
+    $("rev-anos").textContent = "Em " + CAS.dataPt(cz.dia, cz.mes) + " de 2027, " + (nos() ? "vocês completam " : "eles completam ") + anos + (anos === 1 ? " ano" : " anos")
+      + " de casados" + (bodas ? " (" + bodas + ")" : "") + ".";
+    // oferta
+    $("of-nomes").textContent = ela + " & " + ele;
+    $("of-santo").textContent = s.festa ? s.nome : "no dia de " + s.nome;
+    $("of-titulo").textContent = "O livro de orações de " + ela + " e " + ele;
+    $("pr-nomes").textContent = ela + " e " + ele; $("pr-valor").textContent = C.PRECO;
+    $("comprar").textContent = nos() ? "Quero o livro do nosso casamento" : "Quero o livro de presente";
+    var itens = [
+      s.festa ? "<b>O dia do casamento:</b> o que a Igreja celebra em " + esc(CAS.dataPt(cz.dia, cz.mes)) + " (" + esc(s.nome) + ") e o que isso diz ao casal"
+              : "<b>" + esc(s.nome) + ":</b> quem foi e o que o exemplo dele ensina ao casamento de " + esc(ela) + " e " + esc(ele),
+      "<b>A oração do casal</b>, escrita com o nome dos dois e com o que você contou",
+      extra.length ? "<b>Os santos de cada um:</b> " + extra.map(function (x, i) { return esc(quem[i]) + " (" + esc(x.nome) + ")"; }).join(" e ") : null,
+      "<b>Novena do casal:</b> 9 dias para rezarem juntos, com leitura, reflexão e oração",
+      "<b>Renovação das promessas em casa</b>, para o aniversário de casamento",
+      "<b>Orações para cada momento:</b> depois de uma briga, quando falta dinheiro, na doença, pela fé de quem está longe de Deus, antes de dormir",
+      "<b>Os santos dos casais:</b> Sagrada Família, São José, Santa Rita, Santa Mônica, São Luís e Santa Zélia",
+      "<b>Calendário do casal 2027</b>, com o aniversário de casamento e as festas dos santos",
+      "<b>Quadro “Unidos por Deus”</b> com os nomes de vocês, para imprimir e emoldurar"
+    ].filter(Boolean);
+    $("of-itens").innerHTML = itens.map(function (x) { return "<li>" + x + "</li>"; }).join("");
+    if (!C.VENDA_ABERTA) { $("bloco-preco").innerHTML = '<p style="margin:0">As vendas do livro estão pausadas no momento. Volte em breve.</p>'; }
+    mostra("revelacao");
+    CAS.track("Revelou", "ViewContent", { content_name: "O Santo do Nosso Casamento" });
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { CAS.track("Oferta"); io.disconnect(); } }, { threshold: .4 });
+      io.observe($("bloco-preco"));
+    }
+  }
+
+  $("comprar").onclick = function () {
+    var b = this; b.disabled = true; b.textContent = "Abrindo o pagamento…"; $("erro-compra").textContent = "";
+    CAS.track("Checkout", "InitiateCheckout", { value: +C.PRECO, currency: "BRL", content_name: "O Santo do Nosso Casamento" });
+    var pedido = JSON.parse(JSON.stringify(Q));
+    if (!pedido.ela.dia) { delete pedido.ela.dia; delete pedido.ela.mes; }
+    if (!pedido.ele.dia) { delete pedido.ele.dia; delete pedido.ele.mes; }
+    if (nos()) { delete pedido.presenteador; delete pedido.dedicatoria; }
+    CAS.api("/api/casamento/pedido", { body: { pedido: pedido, origem: CAS.ORIGEM } }, 12000).then(function (j) {
+      if (!j.url) throw new Error(j.detail || j.erro || "sem url");
+      CAS.ls("cas_ref", j.ref); CAS.ls("cas_nomes", CAS.primeiro(Q.ela.nome) + " e " + CAS.primeiro(Q.ele.nome));
+      location.href = j.url;
+    }).catch(function () {
+      if (C.CHECKOUT) {  // servidor fora do ar: não perde a venda; depois da compra o e-mail pede a data do casamento
+        var q = new URLSearchParams(); Object.keys(CAS.ORIGEM).forEach(function (k) { if (k.indexOf("utm_") === 0 || k === "src") q.set(k, CAS.ORIGEM[k]); });
+        location.href = C.CHECKOUT + (C.CHECKOUT.indexOf("?") > 0 ? "&" : "?") + q.toString(); return;
+      }
+      b.disabled = false; b.textContent = "Tentar de novo";
+      $("erro-compra").textContent = "Não conseguimos abrir o pagamento. Confira a internet e tente de novo.";
+    });
+  };
+})();
+</script>
+</body>
+</html>

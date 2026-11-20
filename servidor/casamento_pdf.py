@@ -150,14 +150,15 @@ p { margin: 0 0 3.2mm; text-align: justify; hyphens: auto; }
 .dia:last-child { border-bottom: 0; }
 .num { font-family: Cinzel, serif; color: #A57F35; font-size: 10pt; letter-spacing: .2em; }
 .gesto { font-family: Outfit, sans-serif; font-size: 10pt; color: #4b4560; background: #f1e8d8; border-radius: 6px; padding: 2mm 3.5mm; display: inline-block; }
-.santinho { text-align: center; margin: 2mm 0 5mm; }
+.santinho { text-align: center; margin: 0 0 2mm; }
+.cada { break-inside: avoid; }
 .santo-nome { font-family: Cinzel, serif; font-size: 21pt; color: #17295A; text-align: center; margin: 1mm 0; letter-spacing: .03em; }
-.santo-quem { text-align: center; font-style: italic; color: #6b6385; margin: 0 0 6mm; }
+.santo-quem { text-align: center; font-style: italic; color: #6b6385; margin: 0 0 4mm; }
 .aviso { font-family: Outfit, sans-serif; font-size: 10.2pt; line-height: 1.5; border: 1px solid #d9b8a0; background: #fff3ea; border-radius: 8px; padding: 3.5mm 4.5mm; margin: 4mm 0; break-inside: avoid; }
 .aviso b { color: #7a3414; }
 .caixa { border: 1px solid #e2cf9f; background: #fffaf0; border-radius: 10px; padding: 4mm 5mm; margin: 4mm 0; break-inside: avoid; }
-.dois { display: flex; gap: 6mm; } .dois > div { flex: 1; }
-.mini { text-align: center; border: 1px solid #e2cf9f; border-radius: 10px; padding: 4mm; background: #fffaf0; }
+.dois { display: flex; gap: 6mm; break-inside: avoid; } .dois > div { flex: 1; }
+.mini { text-align: center; border: 1px solid #e2cf9f; border-radius: 10px; padding: 3mm; background: #fffaf0; }
 .mini .quem { font-family: Cinzel, serif; font-size: 9pt; letter-spacing: .2em; color: #A57F35; }
 .mini .st { font-family: Cinzel, serif; font-size: 13pt; color: #17295A; margin: 1.5mm 0; }
 .mini .dt { font-style: italic; color: #6b6385; font-size: 12pt; }
@@ -247,7 +248,7 @@ def html_livro(ctx, ia):
         abre = f"Vocês se casaram no dia {ctx['DATA_CURTA']}, um dia de festa da Igreja: {ctx['SANTO']}."
     else:
         abre = f"Vocês se casaram no dia {ctx['DATA_CURTA']}. Nesse dia, a Igreja recorda {ctx['SANTO']}."
-    santo = (f'<div class="santinho">{svg_aliancas(118, raios=True)}</div><div class="santo-nome">{E(ctx["SANTO"])}</div>'
+    santo = (f'<div class="santinho">{svg_aliancas(92, raios=True)}</div><div class="santo-nome">{E(ctx["SANTO"])}</div>'
              + (f'<div class="santo-quem">{E(ctx["SANTO_QUEM"])}</div>' if ctx["SANTO_QUEM"] else '<div class="santo-quem"></div>')
              + _p(abre) + "".join(_p(x) for x in (ia["santo_historia"],)) + "<h3>O que este dia diz ao casamento de vocês</h3>" + _p(ia["santo_casamento"])
              + _oracao(f"{ctx['INVOCACAO']} Rogai a Deus por {ctx['ELA']} e por {ctx['ELE']}, e pelo casamento que começou no vosso dia. Amém."
@@ -258,8 +259,8 @@ def html_livro(ctx, ia):
             if st:
                 minis += (f'<div class="mini"><div class="quem">{E(nome.upper())}</div><div class="st">{E(st["nome"])}</div>'
                           f'<div class="dt">nasceu em {E(data_pt(st["dia"], st["mes"]))}</div></div>')
-        santo += ("<h3>Os santos de cada um</h3>" + _p("Cada um de vocês também nasceu no dia de um santo. São os amigos do Céu que acompanham "
-                  "o casal: o do dia do casamento e o de cada um.") + f'<div class="dois">{minis}</div>')
+        santo += ('<div class="cada"><h3>Os santos de cada um</h3>' + _p("Cada um de vocês também nasceu no dia de um santo, que acompanha o casal "
+                  "junto com o santo do dia do casamento.") + f'<div class="dois">{minis}</div></div>')
     pagina_santo = _secao("O dia do nosso sim", "O santo do nosso casamento", santo)
     # orações do casal
     oracoes = (_p("Esta é a oração do casamento de vocês, escrita com o nome dos dois e com o que vocês contaram. Rezem juntos, de mãos dadas, "
