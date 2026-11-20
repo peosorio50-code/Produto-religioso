@@ -126,8 +126,8 @@ html, body { background: #ffffff; }
 body { margin: 0; font-family: 'Cormorant Garamond', Georgia, 'DejaVu Serif', serif; color: #2a2338; font-size: 14.2pt; line-height: 1.5; }
 .capa { page: capa; width: 210mm; height: 297mm; box-sizing: border-box; background: #0B1636; color: #F5ECD9; position: relative;
         display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 26mm 22mm; break-after: page; }
-.capa::before { content: ""; position: absolute; inset: 11mm; border: 1.2px solid #C9A052; border-radius: 4px; }
-.capa::after { content: ""; position: absolute; inset: 14mm; border: .6px solid rgba(201,160,82,.55); border-radius: 3px; }
+.capa::before { content: ""; position: absolute; top: 11mm; right: 11mm; bottom: 11mm; left: 11mm; border: 1.2px solid #C9A052; border-radius: 4px; }
+.capa::after { content: ""; position: absolute; top: 14mm; right: 14mm; bottom: 14mm; left: 14mm; border: .6px solid rgba(201,160,82,.55); border-radius: 3px; }
 .capa .marca { font-family: Cinzel, serif; letter-spacing: .32em; font-size: 9.5pt; color: #E9CF93; margin-bottom: 14mm; }
 .capa h1 { font-family: Cinzel, serif; font-weight: 500; font-size: 25pt; letter-spacing: .08em; line-height: 1.25; margin: 6mm 0 2mm; color: #F5ECD9; }
 .capa .nomes { font-family: 'Great Vibes', cursive; font-size: 54pt; color: #E9CF93; line-height: 1.1; margin: 8mm 0 4mm; }
@@ -171,8 +171,8 @@ ol.passos { padding-left: 6mm; margin: 0 0 4mm; } ol.passos li { margin-bottom: 
 .fala { font-style: italic; margin: 2mm 0 4mm; } .fala b { font-style: normal; font-family: Cinzel, serif; font-size: 10pt; color: #A57F35; letter-spacing: .12em; }
 .quadro { page: capa; width: 210mm; height: 297mm; box-sizing: border-box; background: #F8F3EE; position: relative; display: flex; flex-direction: column;
           align-items: center; justify-content: center; text-align: center; padding: 30mm; break-before: page; }
-.quadro::before { content: ""; position: absolute; inset: 14mm; border: 2px solid #C9A052; border-radius: 6px; }
-.quadro::after { content: ""; position: absolute; inset: 18mm; border: .8px solid #C9A052; border-radius: 4px; }
+.quadro::before { content: ""; position: absolute; top: 14mm; right: 14mm; bottom: 14mm; left: 14mm; border: 2px solid #C9A052; border-radius: 6px; }
+.quadro::after { content: ""; position: absolute; top: 18mm; right: 18mm; bottom: 18mm; left: 18mm; border: .8px solid #C9A052; border-radius: 4px; }
 .quadro .nomes { font-family: 'Great Vibes', cursive; font-size: 66pt; color: #17295A; line-height: 1.05; margin: 8mm 0 6mm; }
 .quadro .l1 { font-family: Cinzel, serif; letter-spacing: .22em; font-size: 11pt; color: #A57F35; }
 .quadro .l2 { font-size: 17pt; font-style: italic; color: #2a2338; margin: 2mm 0; }

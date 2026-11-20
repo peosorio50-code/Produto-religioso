@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Vídeos 9:16</title>
+<link rel="stylesheet" href="base.css"><script src="svg.js"></script>
+<style>
+.v { display: none; } .v.ativo { display: block; }
+.a { position: absolute; left: 0; right: 0; text-align: center; will-change: opacity, transform; }
+.folha { position: absolute; left: 190px; width: 700px; top: 700px; height: 720px; background: #fffaf0; border-radius: 26px; box-shadow: 0 30px 70px rgba(0,0,0,.45); overflow: hidden; text-align: center; }
+.folha .topo { background: #9e2b25; height: 150px; color: #fff; font-family: 'Cinzel'; font-size: 64px; letter-spacing: .12em; line-height: 150px; }
+.folha .num { font-family: 'Cinzel'; font-size: 300px; color: var(--azul); line-height: 1; margin-top: 40px; }
+.folha .st { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 66px; color: #8a6420; line-height: 1.1; padding: 0 30px; }
+.pg { position: absolute; left: 190px; width: 700px; top: 470px; box-shadow: 0 30px 70px rgba(0,0,0,.3); background: #fff; }
+.pg img { width: 100%; display: block; }
+.leg { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 64px; color: var(--azul); }
+</style></head><body>
+
+<!-- V1: calendário -->
+<div class="peca f916 escuro v" id="v1-calendario">
+  <div class="a" style="top:110px"><div class="marca" style="font-size:26px">✝ MEU SANTO PROTETOR ✝</div></div>
+  <div class="a serif" id="v1-t" style="top:330px;font-size:86px;font-weight:600;line-height:1.08;color:#fff7e6;padding:0 70px">Todo casamento acontece no dia de um santo.</div>
+  <div class="folha" id="v1-folha"><div class="topo" id="v1-mes"></div><div class="num" id="v1-num"></div><div class="st" id="v1-st"></div></div>
+  <div class="a serif" id="v1-e" style="top:1400px;font-size:84px;font-style:italic;color:#fff">E o dia de vocês?</div>
+  <div class="a" id="v1-cta" style="top:1560px"><span class="cta" style="font-size:44px;padding:30px 56px">Descubra grátis em 1 minuto</span></div>
+</div>
+
+<!-- V2: vela -->
+<div class="peca f916 v" id="v2-vela" style="background:radial-gradient(60% 40% at 50% 47%, #3a2a10 0%, #120c05 55%, #050302 100%);color:#F5ECD9">
+  <div class="a" style="top:110px"><div class="marca" style="font-size:26px">✝ MEU SANTO PROTETOR ✝</div></div>
+  <div class="a" style="top:640px">
+    <div id="v2-chama" style="width:64px;height:110px;margin:0 auto;background:radial-gradient(circle at 50% 70%, #fff7d6, #f6c75f 45%, #e0861a 80%);border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;box-shadow:0 0 120px 60px rgba(246,199,95,.33);transform-origin:50% 100%"></div>
+    <div style="width:96px;height:360px;margin:8px auto 0;background:linear-gradient(90deg,#e9dcc0,#fffaf0 40%,#d9c9a6);border-radius:8px"></div>
+  </div>
+  <div class="a" id="v2-aneis" style="top:1180px" data-svg="aneis,200,#E9CF93"></div>
+  <div class="a serif" id="v2-t1" style="top:260px;font-size:88px;font-weight:600;line-height:1.1;color:#fff3dc;padding:0 80px">Desde o dia do seu sim…</div>
+  <div class="a serif" id="v2-t2" style="top:260px;font-size:88px;font-weight:600;line-height:1.1;color:#fff3dc;padding:0 80px">…um santo reza pelo seu casamento.</div>
+  <div class="a serif" id="v2-t3" style="top:1450px;font-size:84px;font-style:italic;color:#f1e3c4">Você sabe quem é ele?</div>
+  <div class="a" id="v2-cta" style="top:1600px"><span class="cta" style="font-size:44px;padding:30px 56px">Descubra grátis · 1 minuto</span></div>
+</div>
+
+<!-- V3: o livro por dentro -->
+<div class="peca f916 claro v" id="v3-livro">
+  <div class="a" style="top:100px"><div class="marca" style="font-size:26px">✝ MEU SANTO PROTETOR ✝</div></div>
+  <div class="a serif" style="top:170px;font-size:78px;font-weight:600;line-height:1.1;color:var(--azul);padding:0 70px">O livro de orações do casal</div>
+  <div class="pg" id="v3-p0"><img src="img/capa.jpg"></div>
+  <div class="pg" id="v3-p1"><img src="img/santo.jpg"></div>
+  <div class="pg" id="v3-p2"><img src="img/oracao.jpg"></div>
+  <div class="pg" id="v3-p3"><img src="img/novena.jpg"></div>
+  <div class="pg" id="v3-p4"><img src="img/quadro.jpg"></div>
+  <div class="a leg" id="v3-leg" style="top:1500px"></div>
+  <div class="a" id="v3-ex" style="top:1600px;font-size:26px;color:#9a93ad">livro de exemplo: Ana e José</div>
+  <div class="a" id="v3-fim" style="top:560px;z-index:50">
+    <div data-svg="aneis,260"></div>
+    <div class="serif" style="font-size:80px;font-weight:600;color:var(--azul);line-height:1.1;margin-top:30px;padding:0 70px">Descubra o santo do dia do seu casamento</div>
+    <div style="font-size:40px;color:var(--suave);margin-top:30px">grátis · 1 minuto</div>
+    <div style="margin-top:60px"><span class="cta azul" style="font-size:42px;padding:28px 50px">Livro do casal: R$ 37</span></div>
+    <div style="font-size:30px;color:var(--suave);margin-top:24px">chega no e-mail em poucos minutos</div>
+  </div>
+</div>
+
+<script>
+SVG.pinta();
+var $ = function (id) { return document.getElementById(id); };
+var cl = function (x) { return Math.max(0, Math.min(1, x)); };
+var ease = function (x) { x = cl(x); return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; };
+// opacidade de um elemento que entra em a, sai em b (fade de f segundos)
+var janela = function (t, a, b, f) { f = f || .4; return Math.min(cl((t - a) / f), b == null ? 1 : cl((b - t) / f)); };
+function pos(el, op, dy, esc) { el.style.opacity = op; el.style.transform = "translateY(" + (dy || 0) + "px) scale(" + (esc || 1) + ")"; }
+
+var DATAS = [["JUNHO", "13", "Santo Antônio"], ["MARÇO", "19", "São José"], ["MAIO", "22", "Santa Rita de Cássia"], ["OUTUBRO", "12", "Nossa Senhora Aparecida"]];
+var VIDEOS = {
+  "v1-calendario": { dur: 13, f: function (t) {
+    pos($("v1-t"), janela(t, 0, null, .6), 30 * (1 - ease(t / .8)));
+    var i = Math.min(3, Math.max(0, Math.floor((t - 1.2) / 1.9))), lt = (t - 1.2) - i * 1.9;
+    var d = DATAS[i]; $("v1-mes").textContent = d[0]; $("v1-num").textContent = d[1]; $("v1-st").textContent = d[2];
+    var fo = t < 1.2 ? 0 : (t > 9.4 ? cl((9.9 - t) / .5) : 1);
+    pos($("v1-folha"), fo, t < 1.6 ? 80 * (1 - ease((t - 1.2) / .4)) : 0, 1 + (lt < .25 && i > 0 ? (.25 - lt) * .3 : 0));
+    $("v1-st").style.opacity = cl((lt - .45) / .35);
+    pos($("v1-e"), janela(t, 9.8, null, .6), 40 * (1 - ease((t - 9.8) / .6)));
+    pos($("v1-cta"), janela(t, 10.6, null, .5), 0, .9 + .1 * ease((t - 10.6) / .5));
+    $("v1-e").style.top = "1000px"; $("v1-cta").style.top = "1180px";
+  } },
+  "v2-vela": { dur: 12, f: function (t) {
+    $("v2-chama").style.transform = "scale(" + (1 + .05 * Math.sin(t * 9) + .03 * Math.sin(t * 23)) + "," + (1 + .08 * Math.sin(t * 7)) + ") rotate(" + (2 * Math.sin(t * 5)) + "deg)";
+    $("v2-aneis").style.transform = "scale(" + (1 + .04 * Math.sin(t * 2.2)) + ")"; $("v2-aneis").style.opacity = .35 + .65 * cl((t - 5.5) / 1);
+    pos($("v2-t1"), janela(t, .3, 3.2, .5), 20 * (1 - ease((t - .3) / .6)));
+    pos($("v2-t2"), janela(t, 3.5, null, .5), 20 * (1 - ease((t - 3.5) / .6)));
+    pos($("v2-t3"), janela(t, 6.6, null, .6), 30 * (1 - ease((t - 6.6) / .6)));
+    pos($("v2-cta"), janela(t, 8.6, null, .5), 0, .9 + .1 * ease((t - 8.6) / .5));
+  } },
+  "v3-livro": { dur: 14, f: function (t) {
+    var LEG = ["Com o nome de vocês dois", "O santo do dia do casamento", "A oração do casal", "A novena de 9 dias", "O quadro para emoldurar"];
+    for (var i = 0; i < 5; i++) {
+      var a = .3 + i * 2.3, el = $("v3-p" + i), e = ease((t - a) / .6);
+      var sai = i < 4 ? cl((t - (a + 2.3)) / .6) : cl((t - 11.9) / .5);
+      el.style.opacity = t < a ? 0 : (1 - (i < 4 ? 0 : sai)) * (1 - cl((t - 11.9) / .5));
+      el.style.transform = "translateX(" + ((1 - e) * 900 - (i < 4 ? ease(sai) * 120 : 0)) + "px) rotate(" + ((1 - e) * 8 + (i % 2 ? 2 : -2)) + "deg) scale(" + (1 - (i < 4 ? .08 * ease(sai) : 0)) + ")";
+      el.style.zIndex = 10 + i;
+    }
+    var k = Math.min(4, Math.max(0, Math.floor((t - .3) / 2.3)));
+    $("v3-leg").textContent = LEG[k]; pos($("v3-leg"), t > 12 ? cl((12.4 - t) / .4) : janela(t, .6, null, .4));
+    $("v3-ex").style.opacity = t > 12 ? 0 : cl((t - .6) / .4);
+    pos($("v3-fim"), janela(t, 12.3, null, .5), 30 * (1 - ease((t - 12.3) / .5)));
+  } }
+};
+function mostra(id) { document.querySelectorAll(".v").forEach(function (v) { v.classList.toggle("ativo", v.id === id); }); }
+</script>
+</body></html>
