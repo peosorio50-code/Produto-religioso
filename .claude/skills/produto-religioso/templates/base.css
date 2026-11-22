@@ -1,0 +1,33 @@
+@font-face { font-family: 'Cormorant Garamond'; src: url('../servidor/casamento_fontes/CormorantGaramond-400.ttf'); font-weight: 400; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('../servidor/casamento_fontes/CormorantGaramond-400i.ttf'); font-weight: 400; font-style: italic; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('../servidor/casamento_fontes/CormorantGaramond-600.ttf'); font-weight: 600; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('../servidor/casamento_fontes/CormorantGaramond-600i.ttf'); font-weight: 600; font-style: italic; }
+@font-face { font-family: 'Cinzel'; src: url('../servidor/casamento_fontes/Cinzel-500.ttf'); font-weight: 500; }
+@font-face { font-family: 'Cinzel'; src: url('../servidor/casamento_fontes/Cinzel-700.ttf'); font-weight: 700; }
+@font-face { font-family: 'Great Vibes'; src: url('../servidor/casamento_fontes/GreatVibes-400.ttf'); }
+@font-face { font-family: 'Outfit'; src: url('../servidor/casamento_fontes/Outfit-400.ttf'); font-weight: 400; }
+@font-face { font-family: 'Outfit'; src: url('../servidor/casamento_fontes/Outfit-600.ttf'); font-weight: 600; }
+:root { --azul: #17295A; --escuro: #0B1636; --ouro: #C9A052; --ouro2: #E9CF93; --creme: #F8F3EE; --texto: #2a2338; --suave: #6b6385; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #555; font-family: 'Outfit', sans-serif; }
+.peca { position: relative; overflow: hidden; margin: 0 0 40px; }
+.f45 { width: 1080px; height: 1350px; } .f11 { width: 1000px; height: 1000px; } .b1 { width: 1200px; height: 400px; } .b2 { width: 1080px; height: 540px; }
+.f916 { width: 1080px; height: 1920px; }
+.escuro { background: radial-gradient(120% 80% at 50% 25%, #1f3576 0%, var(--escuro) 65%); color: #F5ECD9; }
+.claro { background: var(--creme); color: var(--texto); }
+.cinzel { font-family: 'Cinzel', serif; } .serif { font-family: 'Cormorant Garamond', serif; } .vibes { font-family: 'Great Vibes', cursive; }
+.marca { font-family: 'Cinzel', serif; letter-spacing: .32em; font-size: 22px; color: var(--ouro2); text-align: center; }
+.claro .marca { color: #a57f35; }
+.moldura::before { content: ""; position: absolute; inset: 28px; border: 2px solid rgba(201,160,82,.75); border-radius: 10px; pointer-events: none; }
+.cta { display: inline-block; background: linear-gradient(180deg, #e8c77c, var(--ouro)); color: #1d1406; font-weight: 600; font-size: 38px; padding: 26px 52px; border-radius: 22px;
+       box-shadow: 0 10px 30px rgba(201,160,82,.35); }
+.cta.azul { background: var(--azul); color: #fff; box-shadow: 0 10px 30px rgba(23,41,90,.3); }
+.centro { position: absolute; left: 0; right: 0; text-align: center; }
+.livro { position: absolute; box-shadow: 30px 30px 60px rgba(0,0,0,.35); border-radius: 4px 10px 10px 4px; overflow: hidden; }
+.livro img { width: 100%; display: block; }
+.pagina { position: absolute; box-shadow: 0 20px 50px rgba(0,0,0,.25); background: #fff; }
+.pagina img { width: 100%; display: block; }
+.santinho { background: linear-gradient(180deg, #fffaf0, #f2e6cc); border: 3px solid var(--ouro); border-radius: 22px; text-align: center; color: var(--azul);
+            box-shadow: 0 0 0 8px rgba(201,160,82,.18), 0 24px 50px rgba(0,0,0,.35); }
+.etiqueta { position: absolute; font-family: 'Outfit'; font-size: 20px; color: rgba(255,255,255,.55); }
+.claro .etiqueta { color: #9a93ad; }

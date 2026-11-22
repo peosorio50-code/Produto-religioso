@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Falta só a data do casamento · O Santo do Nosso Casamento</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1636">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script src="config.js"></script>
+<script src="comum.js"></script>
+</head>
+<body>
+<div class="topo">✝ MEU SANTO PROTETOR ✝</div>
+<div class="wrap">
+  <div class="cartao" id="carregando"><p style="margin:0;text-align:center">Carregando…</p></div>
+
+  <form class="cartao escondido" id="form" novalidate>
+    <h1>✅ Pagamento confirmado<span id="nome"></span></h1>
+    <p>O livro é feito com o santo do dia do casamento. Preencha abaixo e ele fica pronto em poucos minutos.</p>
+
+    <div class="campo"><label>O livro é</label>
+      <select id="modo"><option value="nos">Para o meu casamento</option><option value="presente">Para dar de presente a um casal</option></select></div>
+    <div class="campo" id="c-quem"><label>Quem está preenchendo</label>
+      <select id="quem"><option value="ela">Eu sou a esposa</option><option value="ele">Eu sou o marido</option></select></div>
+    <div class="campo escondido" id="c-pres"><label for="pres">O seu nome (vai na dedicatória)</label><input type="text" id="pres" maxlength="40"></div>
+    <div class="campo"><label for="ela">Nome da esposa (primeiro nome)</label><input type="text" id="ela" maxlength="40"></div>
+    <div class="campo"><label for="ele">Nome do marido (primeiro nome)</label><input type="text" id="ele" maxlength="40"></div>
+    <div class="campo"><label>Data do casamento</label><div class="linha3" id="data-cas"></div></div>
+    <div class="campo"><label>Casaram na Igreja?</label>
+      <select id="igreja"><option value="sim">Sim, na Igreja</option><option value="civil">Só no civil</option><option value="nao_sei">Não sei</option></select></div>
+    <div class="campo"><label>O que mais querem entregar a Deus (até 3)</label><div class="opcoes" id="pedidos"></div></div>
+    <div class="bloco-opc"><h4>Aniversário da esposa (opcional)</h4><div class="linha2" id="niv-ela"></div></div>
+    <div class="bloco-opc"><h4>Aniversário do marido (opcional)</h4><div class="linha2" id="niv-ele"></div></div>
+    <div class="campo"><label for="ped">Quer contar algo mais? (opcional)</label><textarea id="ped" maxlength="300"></textarea></div>
+    <div class="campo escondido" id="c-ded"><label for="ded">Dedicatória para o casal (opcional)</label><textarea id="ded" maxlength="300"></textarea></div>
+    <div class="erro" id="erro"></div>
+    <button class="btn" id="enviar" type="submit">Preparar o meu livro</button>
+  </form>
+
+  <div class="cartao status escondido" id="status">
+    <div id="st-gerando"><div class="spin"></div><h2>Estamos preparando o seu livro</h2>
+      <p>Leva de 1 a 3 minutos. Quando ficar pronto, o botão para baixar aparece aqui, e ele também chega no seu e-mail.</p></div>
+    <div id="st-pronto" class="escondido"><div style="font-size:38px">🙏</div><h2>O livro está pronto!</h2>
+      <p>Também mandamos para o seu e-mail.</p><div class="downloads" id="downloads"></div></div>
+  </div>
+
+  <div class="cartao escondido" id="invalido"><h2>Link não encontrado</h2>
+    <p>Abra o link do e-mail que mandamos depois da compra. Se não encontrar, escreva para <a id="contato" href="#"></a> com o e-mail da compra.</p></div>
+</div>
+
+<script>
+(function () {
+  var C = CAS.C, $ = function (id) { return document.getElementById(id); }, esc = CAS.esc;
+  $("contato").href = "mailto:" + C.CONTATO; $("contato").textContent = C.CONTATO;
+  var t = new URLSearchParams(location.search).get("t") || "";
+  var PEDIDOS = [["paciencia", "Mais paciência e diálogo"], ["uniao", "Mais união e carinho"], ["fase", "Força numa fase difícil"], ["fe", "A fé do marido ou da esposa"],
+                 ["saude", "A saúde da família"], ["filhos", "Os filhos"], ["financas", "O trabalho e as contas da casa"], ["gratidao", "Agradecer pelos anos juntos"]];
+  var sel = [];
+  function dia(id) { var h = '<select id="' + id + '"><option value="">Dia</option>'; for (var d = 1; d <= 31; d++) h += "<option>" + d + "</option>"; return h + "</select>"; }
+  function mes(id) { return '<select id="' + id + '"><option value="">Mês</option>' + CAS.MESES.map(function (m, i) { return '<option value="' + (i + 1) + '">' + m + "</option>"; }).join("") + "</select>"; }
+  $("data-cas").innerHTML = dia("cd") + mes("cm") + '<input type="tel" inputmode="numeric" id="ca" maxlength="4" placeholder="Ano">';
+  $("niv-ela").innerHTML = dia("ed") + mes("em"); $("niv-ele").innerHTML = dia("hd") + mes("hm");
+  $("pedidos").innerHTML = PEDIDOS.map(function (p) { return '<button type="button" class="opcao" data-v="' + p[0] + '"><span>' + esc(p[1]) + "</span></button>"; }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll("#pedidos .opcao"), function (b) {
+    b.onclick = function () { var v = b.getAttribute("data-v"), i = sel.indexOf(v);
+      if (i >= 0) { sel.splice(i, 1); b.classList.remove("sel"); } else if (sel.length < 3) { sel.push(v); b.classList.add("sel"); } };
+  });
+  $("modo").onchange = function () { var p = this.value === "presente";
+    $("c-quem").classList.toggle("escondido", p); $("c-pres").classList.toggle("escondido", !p); $("c-ded").classList.toggle("escondido", !p); };
+  function valida(d, m, a) { var x = new Date(a || 2000, m - 1, d); return d && m && x.getDate() === +d && x.getMonth() === m - 1; }
+
+  function acompanha() {
+    $("form").classList.add("escondido"); $("status").classList.remove("escondido"); var n = 0;
+    (function pergunta() {
+      CAS.api("/api/casamento/dados?t=" + encodeURIComponent(t)).then(function (j) {
+        if (j.pronto) { $("st-gerando").classList.add("escondido"); $("st-pronto").classList.remove("escondido");
+          $("downloads").innerHTML = j.arquivos.map(function (a, i) { return '<a class="btn ' + (i ? "claro" : "azul") + '" href="' + esc(a.url) + '" target="_blank" rel="noopener">Baixar: ' + esc(a.titulo) + "</a>"; }).join(""); return; }
+        if (++n < 75) setTimeout(pergunta, 4000);
+      }).catch(function () { if (++n < 75) setTimeout(pergunta, 6000); });
+    })();
+  }
+
+  CAS.api("/api/casamento/dados?t=" + encodeURIComponent(t)).then(function (j) {
+    $("carregando").classList.add("escondido");
+    if (!j.ok) { $("invalido").classList.remove("escondido"); return; }
+    if (j.nome) $("nome").textContent = ", " + j.nome;
+    if (j.precisa) $("form").classList.remove("escondido"); else acompanha();
+  }).catch(function () { $("carregando").classList.add("escondido"); $("invalido").classList.remove("escondido"); });
+
+  $("form").onsubmit = function (ev) {
+    ev.preventDefault();
+    var modo = $("modo").value, d = +$("cd").value, m = +$("cm").value, a = +$("ca").value, erro = "";
+    var p = { modo: modo, quem: $("quem").value, ela: { nome: $("ela").value.trim() }, ele: { nome: $("ele").value.trim() },
+              casamento: { dia: d, mes: m, ano: a }, igreja: $("igreja").value, pedidos: sel, pedido: $("ped").value.trim() };
+    if (modo === "presente") { p.presenteador = $("pres").value.trim(); p.dedicatoria = $("ded").value.trim(); }
+    [["ela", "ed", "em"], ["ele", "hd", "hm"]].forEach(function (x) { var dd = +$(x[1]).value, mm = +$(x[2]).value;
+      if (dd || mm) { if (!valida(dd, mm)) erro = "Confira os aniversários (dia e mês)."; p[x[0]].dia = dd; p[x[0]].mes = mm; } });
+    if (p.ela.nome.length < 2 || p.ele.nome.length < 2) erro = "Escreva os dois nomes.";
+    else if (!valida(d, m, a) || a < 1940 || new Date(a, m - 1, d) > new Date()) erro = "Confira a data do casamento (dia, mês e ano com 4 números).";
+    if (erro) { $("erro").textContent = erro; return; }
+    $("enviar").disabled = true; $("enviar").textContent = "Enviando…";
+    CAS.api("/api/casamento/dados", { body: { t: t, pedido: p } }).then(function (j) {
+      if (j.ok) acompanha(); else throw new Error();
+    }).catch(function () { $("enviar").disabled = false; $("enviar").textContent = "Preparar o meu livro"; $("erro").textContent = "Não conseguimos enviar. Confira os dados e tente de novo."; });
+  };
+})();
+</script>
+</body>
+</html>
