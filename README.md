@@ -13,6 +13,6 @@
 | `criativos/` | O código dos criativos e das imagens (HTML + Playwright + ffmpeg) |
 | `kit/` | As saídas: `kiwify/` (imagem e banners), `criativos/` (8 estáticos 4:5 e 3 vídeos 9:16) e `exemplos/` (PDFs de exemplo) |
 | `testes/` | Teste ponta a ponta do servidor (45 conferências) |
-| `entregas/` | Os 3 zips prontos para subir |
+| `entregas/` | Os zips prontos para subir e a skill `skill-produto-digital.zip` |
 
 As fontes dos PDFs e dos criativos (Cormorant Garamond, Cinzel, Great Vibes e Outfit) são do Google Fonts, com licença SIL Open Font License.

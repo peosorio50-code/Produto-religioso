@@ -1,10 +1,12 @@
-# Playbook: produto religioso novo
+# Playbook: produto novo (qualquer nicho)
 
-O que aprendemos montando o *O Santo do Nosso Casamento* (veja `exemplo-casamento/`), para repetir em qualquer produto.
+As regras do nicho ficam em `nichos/<nicho>.md`. O exemplo completo em PDF é `exemplos/casamento-religioso/`; o exemplo de produto entregue como página é `exemplos/guia-folego-financas.md`.
+
+O que aprendemos montando o *O Santo do Nosso Casamento* (veja `exemplos/casamento-religioso/`), para repetir em qualquer produto.
 
 ## 1. Escolher o produto
 
-**Comece pelo que já foi validado:** o gancho "Todo mundo nasce no dia de um santo. Descubra o seu." O mecanismo vencedor é:
+**Comece pelo que já foi validado.** O mecanismo dado → resultado grátis → material personalizado vale para qualquer nicho: no religioso, a data dá o santo; no financeiro, o quiz das dívidas dá o diagnóstico; no autoconhecimento, a data de nascimento dá o mapa. O gancho do Meu Santo é "Todo mundo nasce no dia de um santo. Descubra o seu." O mecanismo vencedor é:
 1. a pessoa digita uma data;
 2. vê de graça o santo (ou a promessa, ou a oração) daquela data;
 3. recebe a oferta de um material feito com o nome dela.
@@ -12,12 +14,12 @@ O que aprendemos montando o *O Santo do Nosso Casamento* (veja `exemplo-casament
 **Datas que podem virar produto novo com o mesmo gancho:** casamento (feito), batizado, o dia em que um ente querido partiu ("dies natalis": candidato a próximo, pede cuidado redobrado com o luto), ordenação, primeira comunhão.
 
 **Critérios para dar nota a cada ideia:**
-- é o mesmo público (mulheres de 35 a 65 anos, mães e avós);
+- o público é um que já compra das nossas marcas (ou está claramente definido);
 - a emoção é positiva;
 - serve de presente;
 - tem preço de R$ 37 a R$ 97;
-- tem uma escada para os produtos que já existem (Família, Biblioteca);
-- o risco é baixo (doutrina, Meta, atendimento).
+- tem uma escada para os produtos que já existem na marca;
+- o risco é baixo (regras do nicho, Meta, atendimento).
 
 **Produto sazonal só com prazo verdadeiro.** Avise quantas semanas de venda restam.
 
