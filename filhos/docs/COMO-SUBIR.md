@@ -2,10 +2,12 @@
 
 Funciona igual ao casamento: o site fica no Cloudflare Pages e as rotas ficam no servidor do Meu Santo (`/opt/mapadaalma`). Não precisa de porta nova, túnel novo nem domínio novo: o site entra num subdomínio do Meu Santo, `filhos.meusantoprotetor.online`.
 
-**Arquivos (pasta `entregas/`):**
-- `atualizacao-servidor-21-filhos.zip`: o `servidor.py` (v21 = v19 + ganchos do casamento + ganchos da novena), `filhos.py`, `filhos_conteudo.py`, `filhos_pdf.py`, `filhos_fontes/` e, de novo, os arquivos do casamento (para o pacote funcionar mesmo que o casamento ainda não tenha sido instalado).
-- `site-santo-filhos.zip`: o site pronto para o Cloudflare Pages (falta só pôr os vídeos e o `config.js`).
-- `kit-filhos.zip`: imagens da Kiwify, criativos, PDFs de exemplo, estes documentos e os roteiros dos vídeos.
+**Tudo vem num zip só: `novena-pelos-filhos.zip`.** No **Mac**, dê dois cliques nele para abrir a pasta `novena-pelos-filhos`, com:
+- `servidor/`: o que vai para `/opt/mapadaalma`: o `servidor.py` (v21 = v19 + ganchos do casamento + ganchos da novena), `filhos.py`, `filhos_conteudo.py`, `filhos_pdf.py`, `filhos_fontes/` e, de novo, os arquivos do casamento (para funcionar mesmo que o casamento ainda não tenha sido instalado);
+- `site/`: o site para o Cloudflare Pages (falta só pôr os vídeos e preencher o `config.js`);
+- `roteiros/`: os roteiros dos vídeos e as capas prontas;
+- `kiwify/`, `criativos/` e `exemplos/`: imagens da Kiwify, criativos dos anúncios e PDFs de exemplo;
+- `docs/`: este passo a passo, a estratégia, os textos da Kiwify e dos anúncios e o guia técnico.
 
 **Terminais:**
 - **Mac** = o seu computador (de onde o zip sai).
@@ -18,7 +20,7 @@ Funciona igual ao casamento: o site fica no Cloudflare Pages e as rotas ficam no
 
 ## Parte 1: Kiwify (faça primeiro, para ter o código do checkout)
 
-Os textos para copiar estão em `TEXTOS-KIWIFY-E-ANUNCIOS.md`.
+Os textos para copiar estão em `docs/TEXTOS-KIWIFY-E-ANUNCIOS.md`.
 
 1. **Crie o produto `Novena pelos Filhos (em vídeo)`** (R$ 87, garantia de 7 dias):
    - cores do checkout `#F8F3EE` e `#17295A`, imagem e banners da pasta `kiwify/`;
@@ -37,9 +39,13 @@ Os textos para copiar estão em `TEXTOS-KIWIFY-E-ANUNCIOS.md`.
 
 ## Parte 2: servidor (VPS)
 
-7. **Mac**, na pasta onde está o zip:
+7. **Mac**: abra o Terminal **dentro da pasta `novena-pelos-filhos`** (no Finder, clique com o botão direito na pasta → Serviços → Novo Terminal na Pasta) e mande a pasta do servidor:
    ```
-   scp -o ServerAliveInterval=20 atualizacao-servidor-21-filhos.zip root@2.25.252.204:/root/
+   scp -o ServerAliveInterval=20 -r servidor root@2.25.252.204:/root/novena-servidor-21
+   ```
+   Se precisar mandar de novo, apague antes a cópia antiga na **VPS** (senão o `scp` cria uma pasta dentro da outra):
+   ```
+   rm -rf /root/novena-servidor-21
    ```
 
 8. **VPS.** Primeiro confira qual `servidor.py` está lá:
@@ -50,11 +56,11 @@ Os textos para copiar estão em `TEXTOS-KIWIFY-E-ANUNCIOS.md`.
    - **`0cfbd62f7cc1b87e308623185cba50d8`**: o v20, com o casamento já instalado;
    - **`180e1cd74492a19cede3259abe56496f`**: o v19, sem o casamento (o pacote instala o casamento junto, parado até você pôr o `CASAMENTO_CHECKOUT`).
 
-   Se aparecer **outro número, pare aqui**: o `servidor.py` foi mudado depois. Peça ao Claude para aplicar só os 4 ganchos da novena (estão no `GUIA-CLAUDE-FILHOS.md`, seção 5) no arquivo que está na VPS, sem trocar o arquivo inteiro.
+   Se aparecer **outro número, pare aqui**: o `servidor.py` foi mudado depois. Peça ao Claude para aplicar só os 4 ganchos da novena (estão no `docs/GUIA-CLAUDE-FILHOS.md`, seção 5) no arquivo que está na VPS, sem trocar o arquivo inteiro.
 
    Se o número bateu, faça o backup e descompacte:
    ```
-   cd /opt/mapadaalma && cp servidor.py /root/servidor-antes-21.py && unzip -o /root/atualizacao-servidor-21-filhos.zip -d /opt/mapadaalma && (chown -R mapa:mapa servidor.py filhos.py filhos_conteudo.py filhos_pdf.py filhos_fontes casamento.py casamento_conteudo.py casamento_pdf.py casamento_fontes 2>/dev/null; true)
+   cd /opt/mapadaalma && cp servidor.py /root/servidor-antes-21.py && cp -r /root/novena-servidor-21/. /opt/mapadaalma/ && (chown -R mapa:mapa servidor.py filhos.py filhos_conteudo.py filhos_pdf.py filhos_fontes casamento.py casamento_conteudo.py casamento_pdf.py casamento_fontes 2>/dev/null; true)
    ```
 
 9. **VPS:** abra o `.env`:
@@ -100,7 +106,7 @@ cp /root/servidor-antes-21.py /opt/mapadaalma/servidor.py && systemctl restart m
 
 ## Parte 3: site (Cloudflare Pages)
 
-12. **Mac:** descompacte o `site-santo-filhos.zip` numa pasta.
+12. **Mac:** abra a pasta `site/` (dentro de `novena-pelos-filhos`).
     - Ponha os vídeos que você montou na pasta `videos/` (`dia1.mp4` … `dia9.mp4` e `vsl.mp4`). Cada arquivo precisa ter **menos de 25 MB**.
     - Abra o `config.js` num editor de texto e preencha:
       - `CHECKOUT`: `https://pay.kiwify.com.br/CODIGO` (é só a reserva para quando o servidor não responder);
@@ -108,10 +114,11 @@ cp /root/servidor-antes-21.py /opt/mapadaalma/servidor.py && systemctl restart m
       - `VIDEOS`: `dia1: "videos/dia1.mp4"` … `dia9: "videos/dia9.mp4"`, e `terco: "youtube:ID"` quando o terço estiver no YouTube;
       - `UPSELL_ID` e `CHECKOUT_UPSELL` (passo 3). Se deixar vazio, a página de obrigado pula a oferta e mostra a novena.
 
-    Depois gere o zip de novo. No **Mac**, dentro da pasta do site:
+    Depois gere o zip do site. No **Mac**, num Terminal aberto dentro da pasta `site/`:
     ```
     zip -qr ../site-santo-filhos.zip . -x '.DS_Store'
     ```
+    O arquivo `site-santo-filhos.zip` aparece ao lado da pasta `site/`, dentro de `novena-pelos-filhos`.
 13. **Cloudflare:**
     - Workers e Pages → Criar → aba Pages → "Fazer upload de ativos".
     - Nome do projeto: `santo-filhos` → Criar projeto → arraste o zip → Implantar.
@@ -142,7 +149,7 @@ cp /root/servidor-antes-21.py /opt/mapadaalma/servidor.py && systemctl restart m
 
 ## Parte 5: anúncios
 
-Os criativos e a legenda estão em `TEXTOS-KIWIFY-E-ANUNCIOS.md`.
+Os criativos (pasta `criativos/`) e a legenda estão em `docs/TEXTOS-KIWIFY-E-ANUNCIOS.md`.
 
 - **Campanha de vendas própria** (não misture com a Família), com 2 conjuntos de US$ 15 a 20 por dia:
   - **A:** curiosidade e participação;

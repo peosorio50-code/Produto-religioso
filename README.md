@@ -21,5 +21,5 @@ As fontes dos PDFs e dos criativos (Cormorant Garamond, Cinzel, Great Vibes e Ou
 
 # Novena pelos Filhos (Meu Santo Protetor)
 
-Produto novo, em `filhos/` (veja `filhos/README.md`). O servidor da novena está em `servidor/` junto com o do casamento (`filhos.py`, `filhos_conteudo.py`, `filhos_pdf.py`, `filhos_fontes/`), e o `servidor.py` daqui é o **v21** (v19 + ganchos do casamento + ganchos da novena). Teste: `testes/teste_filhos.py`. Zips em `entregas/` (`atualizacao-servidor-21-filhos.zip`, `site-santo-filhos.zip`, `kit-filhos.zip` e `novena-filhos-para-o-carlos.zip`, que junta os três).
+Produto novo, em `filhos/` (veja `filhos/README.md`). O servidor da novena está em `servidor/` junto com o do casamento (`filhos.py`, `filhos_conteudo.py`, `filhos_pdf.py`, `filhos_fontes/`), e o `servidor.py` daqui é o **v21** (v19 + ganchos do casamento + ganchos da novena). Teste: `testes/teste_filhos.py`. Tudo para o Carlos num zip só: `entregas/novena-pelos-filhos.zip` (pastas `servidor/`, `site/`, `roteiros/`, `kiwify/`, `criativos/`, `exemplos/` e `docs/`).
 

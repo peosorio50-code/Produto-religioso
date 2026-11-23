@@ -2,20 +2,20 @@
 
 O servidor, o site, o livro em PDF, as imagens da Kiwify, os criativos estáticos e 3 vídeos mudos **já estão prontos e testados**. O que falta é com você:
 
-1. **Gravar e montar os vídeos narrados** (esta pasta).
+1. **Gravar e montar os vídeos narrados** (roteiros na pasta `roteiros/`).
 2. **Subir** na Kiwify, na VPS e no Cloudflare (o passo a passo está em `docs/COMO-SUBIR.md`, com o terminal de cada comando).
 
-> **Onde está cada coisa:** as imagens citadas nos roteiros como `site/img/...` (capas dos dias, capa da VSL, páginas de exemplo do livro) estão na pasta `roteiros/capas-dos-videos/` do `kit-filhos.zip`, e também na pasta `img/` do `site-santo-filhos.zip`. Os vídeos mudos citados nos anúncios (`v1-calendario.mp4`...) estão em `criativos/` do kit.
+> **Onde está cada coisa (tudo no `novena-pelos-filhos.zip`):** `docs/` (passo a passo, estratégia, textos da Kiwify e dos anúncios), `roteiros/` (estes arquivos e as capas prontas em `roteiros/capas-dos-videos/`), `servidor/` (vai para a VPS), `site/` (vai para o Cloudflare; os vídeos entram em `site/videos/`), `kiwify/` (imagens do checkout), `criativos/` (anúncios, inclusive os vídeos mudos `v1-calendario.mp4`...) e `exemplos/` (PDFs de exemplo). As imagens citadas como `site/img/...` estão em `site/img/` e também em `roteiros/capas-dos-videos/`.
 
 ## Os vídeos, em ordem de prioridade
 
 | # | Vídeo | Roteiro | Duração | Formato | Arquivo | Precisa estar pronto antes de… |
 |---|---|---|---|---|---|---|
-| 1 | **Os 9 vídeos da novena** (o produto) | `02-NOVENA-9-VIDEOS.md` | 3 a 4 min cada | 4:5, 720×900 | `site/videos/dia1.mp4` … `dia9.mp4` | **ligar a venda** |
-| 2 | **VSL** da página de vendas | `01-VSL.md` | ~4 min | 4:5, 720×900, até 22 MB | `site/videos/vsl.mp4` | ligar os anúncios (dá para testar sem, mas a R$ 87 a VSL faz falta) |
-| 3 | **Terço pelos Filhos** (order bump) | `03-TERCO.md` | 20 a 25 min | 4:5; YouTube não listado | link no `config.js` | ligar o bump do terço na Kiwify |
-| 4 | **Anúncios narrados** 9:16 | `04-ANUNCIOS-NARRADOS.md` | 25 a 60 s | 1080×1920 | para o Gerenciador de Anúncios | — (os estáticos e os 3 vídeos mudos do kit já servem para começar) |
-| 5 | Cortes da VSL 9:16 | final do `01-VSL.md` | 45 a 70 s | 1080×1920 | para o Gerenciador | — |
+| 1 | **Os 9 vídeos da novena** (o produto) | `roteiros/02-NOVENA-9-VIDEOS.md` | 3 a 4 min cada | 4:5, 720×900 | `site/videos/dia1.mp4` … `dia9.mp4` | **ligar a venda** |
+| 2 | **VSL** da página de vendas | `roteiros/01-VSL.md` | ~4 min | 4:5, 720×900, até 22 MB | `site/videos/vsl.mp4` | ligar os anúncios (dá para testar sem, mas a R$ 87 a VSL faz falta) |
+| 3 | **Terço pelos Filhos** (order bump) | `roteiros/03-TERCO.md` | 20 a 25 min | 4:5; YouTube não listado | link no `config.js` | ligar o bump do terço na Kiwify |
+| 4 | **Anúncios narrados** 9:16 | `roteiros/04-ANUNCIOS-NARRADOS.md` | 25 a 60 s | 1080×1920 | para o Gerenciador de Anúncios | — (os estáticos e os 3 vídeos mudos do kit já servem para começar) |
+| 5 | Cortes da VSL 9:16 | final do `roteiros/01-VSL.md` | 45 a 70 s | 1080×1920 | para o Gerenciador | — |
 
 > **Não venda antes dos 9 vídeos estarem no ar.** A página da novena funciona sem eles (mostra a capa do dia e o texto), mas a pessoa pagou R$ 87 por uma novena **em vídeo**. Se faltar um vídeo, é reclamação e reembolso.
 
