@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Falta só o nome de cada um · Novena pelos Filhos</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1636">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script src="config.js"></script>
+<script src="comum.js"></script>
+</head>
+<body>
+<div class="topo">✝ MEU SANTO PROTETOR ✝</div>
+<div class="wrap">
+  <div class="cartao" id="carregando"><p style="margin:0;text-align:center">Carregando…</p></div>
+
+  <form class="cartao escondido" id="form" novalidate>
+    <h1>✅ Pagamento confirmado<span id="nome"></span></h1>
+    <p>A novena é feita com o nome e o santo do dia em que cada um nasceu. Preencha abaixo e ela fica pronta em poucos minutos.</p>
+
+    <div class="campo"><label for="papel">Quem vai rezar</label>
+      <select id="papel"><option value="mae">Eu, como mãe</option><option value="avo_f">Eu, como avó</option><option value="pai">Eu, como pai</option><option value="avo_m">Eu, como avô</option></select></div>
+    <div class="campo"><label for="quem">O seu primeiro nome</label><input type="text" id="quem" maxlength="40" autocomplete="given-name"></div>
+    <div class="campo"><label>Por quem você vai rezar (até 6)</label></div>
+    <div id="editor"></div>
+    <div class="campo"><label>O que você mais pede a Deus por eles (até 3)</label><div class="opcoes" id="pedidos"></div></div>
+    <div class="campo"><label for="ped">Quer contar algo mais? (opcional)</label><textarea id="ped" maxlength="300"></textarea></div>
+    <div class="erro" id="erro"></div>
+    <button class="btn" id="enviar" type="submit">Preparar a minha novena</button>
+  </form>
+
+  <div class="cartao status escondido" id="status">
+    <div id="st-gerando"><div class="spin"></div><h2>Estamos preparando a sua novena</h2>
+      <p>Leva de 1 a 3 minutos. Quando ficar pronta, o botão aparece aqui, e ela também chega no seu e-mail.</p></div>
+    <div id="st-pronto" class="escondido"><div style="font-size:38px">🙏</div><h2>A sua novena está pronta!</h2>
+      <p>Também mandamos o link para o seu e-mail.</p><a class="btn" id="ir-area" href="#">Abrir a minha novena (vídeos)</a></div>
+  </div>
+
+  <div class="cartao escondido" id="invalido"><h2>Link não encontrado</h2>
+    <p>Abra o link do e-mail que mandamos depois da compra. Se não encontrar, escreva para <a id="contato" href="#"></a> com o e-mail da compra.</p></div>
+</div>
+
+<script>
+(function () {
+  var C = FIL.C, $ = function (id) { return document.getElementById(id); }, esc = FIL.esc;
+  $("contato").href = "mailto:" + C.CONTATO; $("contato").textContent = C.CONTATO;
+  var t = new URLSearchParams(location.search).get("t") || "";
+  var PEDIDOS = [["fe", "A fé e uma vida perto de Deus"], ["protecao", "Proteção nos caminhos"], ["saude", "Saúde do corpo e da mente"], ["trabalho", "Trabalho e estudos"],
+                 ["familia", "Uma família abençoada"], ["paz", "Paz em casa e união entre irmãos"], ["vicios", "Libertação dos vícios"],
+                 ["longe", "Quem está longe (de casa ou da fé)"], ["gratidao", "Agradecer pela vida de cada um"]];
+  var sel = [];
+  var editor = new FIL.Editor($("editor"), "mae");
+  $("papel").onchange = function () { editor.ler(); editor.papel = this.value; };
+  $("pedidos").innerHTML = PEDIDOS.map(function (p) { return '<button type="button" class="opcao" data-v="' + p[0] + '"><span>' + esc(p[1]) + "</span></button>"; }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll("#pedidos .opcao"), function (b) {
+    b.onclick = function () { var v = b.getAttribute("data-v"), i = sel.indexOf(v);
+      if (i >= 0) { sel.splice(i, 1); b.classList.remove("sel"); } else if (sel.length < 3) { sel.push(v); b.classList.add("sel"); } };
+  });
+
+  function acompanha() {
+    $("form").classList.add("escondido"); $("status").classList.remove("escondido"); var n = 0;
+    (function pergunta() {
+      FIL.api("/api/filhos/dados?t=" + encodeURIComponent(t)).then(function (j) {
+        if (j.pronto) { $("st-gerando").classList.add("escondido"); $("st-pronto").classList.remove("escondido"); $("ir-area").href = j.area; return; }
+        if (++n < 75) setTimeout(pergunta, 4000);
+      }).catch(function () { if (++n < 75) setTimeout(pergunta, 6000); });
+    })();
+  }
+
+  FIL.api("/api/filhos/dados?t=" + encodeURIComponent(t)).then(function (j) {
+    $("carregando").classList.add("escondido");
+    if (!j.ok) { $("invalido").classList.remove("escondido"); return; }
+    if (j.nome) $("nome").textContent = ", " + j.nome;
+    if (j.precisa) $("form").classList.remove("escondido"); else acompanha();
+  }).catch(function () { $("carregando").classList.add("escondido"); $("invalido").classList.remove("escondido"); });
+
+  $("form").onsubmit = function (ev) {
+    ev.preventDefault();
+    var erro = "", quem = $("quem").value.trim();
+    if (quem.length < 2) erro = "Escreva o seu nome.";
+    else erro = editor.valida();
+    if (!erro && !sel.length) erro = "Escolha pelo menos um pedido.";
+    if (erro) { $("erro").textContent = erro; return; }
+    var p = { papel: $("papel").value, quem: { nome: quem }, filhos: editor.dados(), pedidos: sel, pedido: $("ped").value.trim() };
+    $("enviar").disabled = true; $("enviar").textContent = "Enviando…";
+    FIL.api("/api/filhos/dados", { body: { t: t, pedido: p } }).then(function (j) {
+      if (j.ok) acompanha(); else throw new Error();
+    }).catch(function () { $("enviar").disabled = false; $("enviar").textContent = "Preparar a minha novena"; $("erro").textContent = "Não conseguimos enviar. Confira os dados e tente de novo."; });
+  };
+})();
+</script>
+</body>
+</html>

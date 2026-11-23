@@ -1,0 +1,6 @@
+Fontes do Google Fonts usadas nos PDFs, todas sob a SIL Open Font License 1.1 (https://openfontlicense.org):
+- Cormorant Garamond (Christian Thalmann)
+- Cinzel (Natanael Gama)
+- Great Vibes (Robert Leuschke)
+- Outfit (Rodrigo Fuenzalida)
+A licença permite usar, embutir em documentos e redistribuir as fontes; não permite vender as fontes sozinhas.

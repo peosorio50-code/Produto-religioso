@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Novena pelos Filhos · Meu Santo Protetor</title>
+<meta name="description" content="Todo filho nasce no dia de um santo. Descubra, de graça, o santo do dia em que cada filho (ou neto) nasceu, e reze por cada um pelo nome.">
+<meta property="og:title" content="Todo filho nasce no dia de um santo">
+<meta property="og:description" content="Descubra, de graça, o santo do dia em que cada filho ou neto nasceu.">
+<meta property="og:image" content="img/amostra-capa.jpg">
+<meta name="theme-color" content="#0B1636">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script src="config.js"></script>
+<script src="comum.js"></script>
+</head>
+<body>
+<div class="topo">✝ MEU SANTO PROTETOR ✝</div>
+
+<!-- ============ INÍCIO ============ -->
+<section id="inicio">
+  <div class="hero">
+    <div class="wrap">
+      <svg class="simbolo" viewBox="0 0 150 150" aria-hidden="true" id="simbolo"></svg>
+      <h1>Todo filho nasce<br>no <em>dia de um santo</em>.</h1>
+      <p class="sub">Descubra, de graça, o santo do dia em que cada filho (ou neto) nasceu, e reze por cada um pelo nome.</p>
+      <div id="vsl-topo"></div>
+      <button class="btn" id="comecar">Descobrir o santo de cada um</button>
+      <div class="nota">Leva 1 minuto · grátis · para filhos e netos de qualquer idade</div>
+    </div>
+  </div>
+  <div class="wrap passos3">
+    <h2 class="secao">Como funciona</h2>
+    <ol>
+      <li><b>Escreva o nome e o aniversário de cada um.</b> Até seis filhos ou netos.</li>
+      <li><b>Descubra o santo de cada um.</b> Na hora, de graça: o santo (ou a festa) que a Igreja recorda no dia em que cada um nasceu.</li>
+      <li><b>Se quiser, reze a novena por eles.</b> Nove vídeos curtos, um por dia, e um livro com o nome e o santo de cada um.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz" class="escondido">
+  <div class="wrap quiz">
+    <div class="barra"><i id="progresso"></i></div>
+    <div id="etapa"></div>
+  </div>
+</section>
+
+<!-- ============ CARREGANDO ============ -->
+<section id="carregando" class="escondido">
+  <div class="wrap carregando">
+    <div class="chama"></div><div class="vela"></div>
+    <p id="msg-carregando">Procurando no calendário dos santos…</p>
+  </div>
+</section>
+
+<!-- ============ REVELAÇÃO ============ -->
+<section id="revelacao" class="escondido">
+  <div class="revela">
+    <div class="wrap">
+      <div class="k" id="rev-k">O SANTO DE CADA UM</div>
+      <div class="santos-cada" id="rev-lista"></div>
+      <p class="frase" id="rev-frase"></p>
+      <div class="seta">Preparamos algo para você<span>↓</span></div>
+    </div>
+  </div>
+
+  <!-- ============ OFERTA ============ -->
+  <div class="wrap oferta" id="oferta">
+    <div class="kicker-of" style="text-align:center;font-family:var(--titulo);font-size:12px;letter-spacing:.24em;color:var(--ouro-texto);margin:0 0 6px">NOVENA PELOS FILHOS</div>
+    <h2 id="of-titulo">9 dias rezando por cada um, pelo nome</h2>
+    <p class="sub" id="of-sub">Nove vídeos curtos, um por dia, para você rezar junto, e um livro com o nome e o santo de cada um.</p>
+    <div id="vsl-oferta"></div>
+
+    <div class="livro3d"><div class="capa">
+      <div class="m">✝ MEU SANTO PROTETOR ✝</div>
+      <div class="t" id="of-tit-capa">Novena pelos<br>Filhos</div>
+      <div class="n" id="of-nomes"></div>
+      <div class="s" id="of-quem"></div>
+    </div></div>
+    <ul class="itens" id="of-itens"></ul>
+
+    <h2 class="secao" style="margin-top:6px">Os 9 dias</h2>
+    <div class="dias9" id="dias9"></div>
+    <p class="legenda-ex">Cada dia tem um vídeo de poucos minutos, narrado, com a leitura, a reflexão e a oração. Você aperta o play e reza junto.</p>
+
+    <h2 class="secao">Veja o livro por dentro</h2>
+    <div class="amostras">
+      <figure><img src="img/amostra-capa.jpg" alt="Capa do livro com os nomes" loading="lazy" width="620" height="878"><figcaption>A capa, com o nome de cada um</figcaption></figure>
+      <figure><img src="img/amostra-santos.jpg" alt="Página com o santo de cada filho" loading="lazy" width="620" height="878"><figcaption>O santo do dia em que cada um nasceu</figcaption></figure>
+      <figure><img src="img/amostra-oracao.jpg" alt="A oração de cada filho pelo nome" loading="lazy" width="620" height="878"><figcaption>A oração de cada um, pelo nome</figcaption></figure>
+      <figure><img src="img/amostra-dia.jpg" alt="Um dia da novena" loading="lazy" width="620" height="878"><figcaption>Cada dia: leitura, reflexão, oração e gesto</figcaption></figure>
+      <figure><img src="img/amostra-consagracao.jpg" alt="Certificado da consagração a Nossa Senhora" loading="lazy" width="620" height="878"><figcaption>O certificado da consagração a Nossa Senhora</figcaption></figure>
+      <figure><img src="img/amostra-quadro.jpg" alt="Quadro para imprimir com os nomes" loading="lazy" width="620" height="878"><figcaption>O quadro para imprimir e emoldurar</figcaption></figure>
+    </div>
+    <p class="legenda-ex">Páginas de um livro de exemplo (Pedro, Ana e Lucas). O seu sai com os nomes, as datas e os santos de quem você escreveu.</p>
+
+    <div class="preco" id="bloco-preco">
+      <div style="font-size:15px;color:var(--suave)">A novena por <b id="pr-nomes"></b></div>
+      <div class="valor"><small>R$</small> <span id="pr-valor"></span></div>
+      <div class="det">pagamento único · Pix ou cartão · 9 vídeos + o livro em PDF</div>
+      <button class="btn azul" id="comprar">Quero rezar a novena</button>
+      <div class="erro" id="erro-compra" style="text-align:center"></div>
+      <p class="feito">Logo depois do pagamento, a página da sua novena abre aqui mesmo, e tudo chega também no seu e-mail.</p>
+    </div>
+    <div class="garantia"><div class="sel">🛡️</div><div><b>Garantia de 7 dias.</b> Se não for o que você esperava, é só pedir pela Kiwify que devolvemos o seu dinheiro, sem perguntas.</div></div>
+    <p class="transparencia">Material devocional católico do Meu Santo Protetor. Não somos uma paróquia: nada substitui a missa, os sacramentos e a orientação do padre. Os santos intercedem por nós; quem concede as graças é Deus.</p>
+
+    <h2 class="secao">Perguntas frequentes</h2>
+    <div class="faq">
+      <details><summary>Como eu recebo?</summary><p>Assim que o pagamento é aprovado (no Pix é na hora), a novena é preparada com os nomes que você escreveu. Em poucos minutos, a página da sua novena abre aqui, com os 9 vídeos e o livro em PDF para baixar. O link também chega no seu e-mail, junto com o livro.</p></details>
+      <details><summary>Preciso entender de internet?</summary><p>Não. É só abrir o link e apertar o play do dia. Se preferir, reze só pelo livro: cada dia traz a leitura, a reflexão e a oração escritas, com os nomes.</p></details>
+      <details><summary>Quanto tempo leva por dia?</summary><p>Uns dez minutos. Os vídeos são curtos, e você pode rezar no horário que der: de manhã, depois do almoço, antes de dormir. Perdeu um dia? Continue de onde parou.</p></details>
+      <details><summary>Serve para netos? E para filhos adultos?</summary><p>Serve para filhos e netos de qualquer idade, de bebês a adultos com a própria família. As orações de cada um são escritas de acordo com a idade, quando você informa o ano em que nasceu.</p></details>
+      <details><summary>E se um filho estiver longe de Deus ou da família?</summary><p>A novena tem um dia inteiro para quem está longe (o 6º dia, com a parábola do filho pródigo), além da história de Santa Mônica, que rezou anos pelo filho. Não prometemos resultado: a novena é para você rezar com constância e confiança. Quem toca os corações é Deus.</p></details>
+      <details><summary>Posso incluir um filho que já partiu?</summary><p>Pode. Marque "já partiu para junto de Deus" no quiz. Ele aparece com o santo do dia em que nasceu e com uma oração pelo descanso eterno, e é lembrado com carinho em cada dia da novena.</p></details>
+      <details><summary>Posso imprimir?</summary><p>Pode. O livro está em A4 e traz o certificado da consagração a Nossa Senhora e um quadro com os nomes para emoldurar.</p></details>
+      <details><summary>Vocês são da Igreja?</summary><p>Somos o Meu Santo Protetor, uma equipe que prepara material devocional católico. Não somos uma paróquia e nada substitui a missa, os sacramentos e a orientação do padre. O narrador dos vídeos é da nossa equipe, não é padre. A novena segue a fé católica: os santos rezam por nós e quem concede as graças é Deus.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Meu Santo Protetor · material devocional católico</div>
+  <div><a href="privacidade.html">Privacidade</a> · <a id="contato" href="#">Contato</a></div>
+</footer>
+
+<script>
+(function () {
+  var C = FIL.C, esc = FIL.esc, $ = function (id) { return document.getElementById(id); };
+  var SIMB = '<g stroke="#C9A052" fill="none">' + (function () { var r = ""; for (var i = 0; i < 36; i++) { var a = i * Math.PI / 18, c1 = 50, c2 = i % 2 ? 74 : 66;
+      r += '<line x1="' + (75 + c1 * Math.cos(a)).toFixed(1) + '" y1="' + (80 + c1 * Math.sin(a)).toFixed(1) + '" x2="' + (75 + c2 * Math.cos(a)).toFixed(1) + '" y2="' + (80 + c2 * Math.sin(a)).toFixed(1) + '" stroke-width="' + (i % 2 ? 1.2 : .7) + '" opacity=".55"/>'; }
+      for (i = 0; i < 12; i++) { var b = (200 + i * 140 / 11) * Math.PI / 180; r += '<circle cx="' + (75 + 40 * Math.cos(b)).toFixed(1) + '" cy="' + (62 + 40 * Math.sin(b)).toFixed(1) + '" r="2.6" fill="#C9A052" stroke="none"/>'; }
+      return r; })()
+    + '<path d="M75 44 C60 58 52 86 44 120 Q75 128 106 120 C98 86 90 58 75 44 Z" stroke-width="4" stroke-linejoin="round"/><circle cx="75" cy="58" r="8" stroke-width="3.5"/>'
+    + '<path d="M75 76 v30 M65 86 h20" stroke-width="3.5" stroke-linecap="round"/></g>';
+  $("simbolo").innerHTML = SIMB;
+  $("contato").href = "mailto:" + C.CONTATO;
+  FIL.pixel(); FIL.track("Entrou");
+
+  var DIAS = ["Os filhos que Deus me confiou", "A oração que não desiste", "A fé que passa de geração em geração", "Proteção: os anjos da guarda",
+              "Saúde do corpo, da mente e do coração", "O filho que está longe", "Trabalho, estudos e o futuro", "Paz em casa e união entre irmãos", "Debaixo do manto de Maria"];
+  $("dias9").innerHTML = DIAS.map(function (t, i) { return '<figure><img src="img/dia' + (i + 1) + '.jpg" alt="" loading="lazy" width="360" height="450"><figcaption><b>' + (i + 1) + 'º DIA</b>' + esc(t) + '</figcaption></figure>'; }).join("");
+
+  // ---------- VSL ----------
+  var vsl = null;
+  function montaVsl(dest) {
+    if (!C.VSL_SRC) return;
+    var w = document.createElement("div"); w.className = "vsl";
+    w.innerHTML = '<video playsinline muted preload="metadata" poster="' + esc(C.VSL_POSTER || "") + '" src="' + esc(C.VSL_SRC) + '"></video><button type="button" class="som">🔊 Toque para ouvir</button>';
+    dest.appendChild(w);
+    var v = w.querySelector("video"), b = w.querySelector(".som"), marcos = { 25: "Vsl25", 50: "Vsl50", 75: "Vsl75", 95: "Vsl95" };
+    b.onclick = function () { v.muted = false; v.currentTime = 0; v.play(); b.remove(); FIL.track("VslSom"); };
+    v.onclick = function () { if (b.parentNode) return b.onclick(); v.paused ? v.play() : v.pause(); };
+    v.ontimeupdate = function () {
+      if (v.currentTime >= 10) FIL.track("Vsl10s");
+      var pct = v.duration ? 100 * v.currentTime / v.duration : 0;
+      Object.keys(marcos).forEach(function (k) { if (pct >= +k && !v.muted) FIL.track(marcos[k]); });
+    };
+    vsl = v;
+  }
+  if (C.VSL_TOPO) { montaVsl($("vsl-topo")); if (vsl) vsl.play().catch(function () {}); } else montaVsl($("vsl-oferta"));
+
+  // ---------- quiz ----------
+  var Q = { papel: "", quem: { nome: "" }, filhos: [], pedidos: [], pedido: "" };
+  var editor = null;
+  var PEDIDOS = [["fe", "✝️", "A fé e uma vida perto de Deus"], ["protecao", "🛡️", "Proteção nos caminhos"], ["saude", "🌿", "Saúde do corpo e da mente"],
+                 ["trabalho", "📚", "Trabalho e estudos"], ["familia", "💍", "Uma família abençoada"], ["paz", "🕊️", "Paz em casa e união entre irmãos"],
+                 ["vicios", "⛓️", "Libertação dos vícios"], ["longe", "🏠", "Quem está longe (de casa ou da fé)"], ["gratidao", "🙏", "Agradecer pela vida de cada um"]];
+  var avos = function () { return Q.papel === "avo_f" || Q.papel === "avo_m"; };
+
+  function opcoes(lista, atual, multi) {
+    return '<div class="opcoes">' + lista.map(function (o) {
+      var sel = multi ? atual.indexOf(o[0]) >= 0 : atual === o[0];
+      return '<button type="button" class="opcao' + (sel ? " sel" : "") + '" data-v="' + o[0] + '"><span class="ic">' + o[1] + '</span><span>' + esc(o[2]) + '</span></button>';
+    }).join("") + '</div>';
+  }
+
+  var ETAPAS = [
+    { html: function () { return '<h2 class="pergunta">Quem vai rezar?</h2><p class="ajuda">Para escrevermos as orações do jeito certo.</p>'
+        + opcoes([["mae", "👩", "Eu, como mãe"], ["avo_f", "👵", "Eu, como avó"], ["pai", "👨", "Eu, como pai"], ["avo_m", "👴", "Eu, como avô"]], Q.papel); },
+      clique: function (v) { if (Q.papel !== v) editor = null; Q.papel = v; return true; } },
+    { html: function () { return '<h2 class="pergunta">Qual é o seu primeiro nome?</h2><p class="ajuda">Vai na capa do livro e nas orações que você vai rezar.</p>'
+        + '<div class="campo"><input type="text" id="f-quem" maxlength="40" autocomplete="given-name" placeholder="Seu primeiro nome" value="' + esc(Q.quem.nome) + '"></div>'; },
+      ok: function () { Q.quem.nome = $("f-quem").value.trim(); return Q.quem.nome.length >= 2 ? "" : "Escreva o seu nome."; }, botao: true },
+    { html: function () { return '<h2 class="pergunta">' + (avos() ? "Por quem você quer rezar?" : "Os seus filhos") + '</h2>'
+        + '<p class="ajuda">O primeiro nome e o dia em que cada um nasceu. Pode colocar filhos e netos, até ' + FIL.MAX + '.</p><div id="editor"></div>'; },
+      depois: function () { editor = new FIL.Editor($("editor"), Q.papel, editor ? editor.p : null); },
+      ok: function () { var m = editor.valida(); if (m) return m; Q.filhos = editor.dados(); return ""; }, botao: true },
+    { html: function () { return '<h2 class="pergunta">O que você mais pede a Deus por ' + (Q.filhos.length > 1 ? "eles" : "essa pessoa") + '?</h2>'
+        + '<p class="ajuda">Escolha até 3. Entra na oração de cada um e na novena.</p>' + opcoes(PEDIDOS, Q.pedidos, true); },
+      clique: function (v, b) { var i = Q.pedidos.indexOf(v);
+        if (i >= 0) { Q.pedidos.splice(i, 1); b.classList.remove("sel"); } else if (Q.pedidos.length < 3) { Q.pedidos.push(v); b.classList.add("sel"); }
+        return false; },
+      ok: function () { return Q.pedidos.length ? "" : "Escolha pelo menos uma opção."; }, botao: true },
+    { html: function () {
+        return '<h2 class="pergunta">Quer contar algo mais?</h2><p class="ajuda">Opcional. Um pedido especial, um momento que alguém está vivendo. Usamos com discrição, só nas orações.</p>'
+          + '<div class="campo"><textarea id="f-ped" maxlength="300" placeholder="Ex.: que o Pedro encontre um trabalho e volte a rezar">' + esc(Q.pedido) + '</textarea><div class="contador"><span id="cont">0</span>/300</div></div>'; },
+      depois: function () { var t = $("f-ped"), c = $("cont"); var f = function () { c.textContent = t.value.length; }; t.oninput = f; f(); },
+      ok: function () { Q.pedido = $("f-ped").value.trim(); return ""; }, botao: true, textoBotao: "Revelar o santo de cada um" }
+  ];
+
+  var atual = 0;
+  function mostra(sec) { ["inicio", "quiz", "carregando", "revelacao"].forEach(function (s) { $(s).classList.toggle("escondido", s !== sec); }); window.scrollTo(0, 0); }
+  function render() {
+    var e = ETAPAS[atual];
+    $("progresso").style.width = Math.round(100 * atual / ETAPAS.length) + "%";
+    var h = e.html() + '<div class="erro" id="erro"></div><div class="acoes">';
+    if (e.botao) h += '<button class="btn" id="seguir">' + (e.textoBotao || "Continuar") + '</button>';
+    h += '</div>' + (atual > 0 ? '<button class="link voltar" id="voltar">← Voltar</button>' : "");
+    $("etapa").innerHTML = h;
+    if (e.depois) e.depois();
+    Array.prototype.forEach.call(document.querySelectorAll("#etapa .opcao"), function (b) {
+      b.onclick = function () {
+        if (e.clique(b.getAttribute("data-v"), b) === true) {
+          Array.prototype.forEach.call(document.querySelectorAll("#etapa .opcao"), function (x) { x.classList.toggle("sel", x === b); });
+          setTimeout(avanca, 180);
+        }
+      };
+    });
+    if ($("seguir")) $("seguir").onclick = function () { var m = e.ok ? e.ok() : ""; if (m) { $("erro").textContent = m; return; } avanca(); };
+    if ($("voltar")) $("voltar").onclick = function () { if (editor && atual === 2) editor.ler(); atual--; render(); };
+    var inp = document.querySelector("#etapa input[type=text]"); if (inp && !inp.value) setTimeout(function () { inp.focus(); }, 60);
+  }
+  function avanca() { if (atual < ETAPAS.length - 1) { atual++; render(); window.scrollTo(0, 0); } else revelar(); }
+
+  $("comecar").onclick = function () { FIL.track("QuizInicio"); mostra("quiz"); render(); };
+
+  var SANTOS = null;
+  function revelar() {
+    mostra("carregando");
+    var ds = Q.filhos.map(function (f) { return FIL.dd(f.dia) + FIL.dd(f.mes); });
+    var t0 = Date.now();
+    setTimeout(function () { $("msg-carregando").textContent = "Encontramos " + (Q.filhos.length > 1 ? Q.filhos.length + " datas" : "a data") + "…"; }, 1200);
+    FIL.api("/api/filhos/santos?d=" + ds.join(","), {}, 10000).then(function (j) {
+      if (!j.santos) throw new Error("sem santos");
+      SANTOS = j.santos;
+      setTimeout(mostraRevelacao, Math.max(0, 2300 - (Date.now() - t0)));
+    }).catch(function () {
+      $("msg-carregando").innerHTML = 'Não conseguimos consultar o calendário agora.<br><button class="btn" style="margin-top:18px" id="denovo">Tentar de novo</button>';
+      $("denovo").onclick = revelar;
+    });
+  }
+
+  function invoc(s) { return s.festa ? "Santa Maria, Mãe de Deus" : s.nome; }
+
+  function mostraRevelacao() {
+    var pessoas = Q.filhos.map(function (f, i) { return { nome: FIL.primeiro(f.nome), rel: f.rel, partiu: f.partiu, dia: f.dia, mes: f.mes, s: SANTOS[i] }; });
+    var vivos = pessoas.filter(function (p) { return !p.partiu; }); if (!vivos.length) vivos = pessoas;
+    var nomes = FIL.lista(vivos.map(function (p) { return p.nome; }));
+    $("rev-k").textContent = pessoas.length > 1 ? "O SANTO DE CADA UM" : "O SANTO DO DIA EM QUE " + pessoas[0].nome.toUpperCase() + " NASCEU";
+    $("rev-lista").innerHTML = pessoas.map(function (p) {
+      return '<div class="santinho"><div class="quem-e">' + esc(p.rel.toUpperCase()) + ' · NASCEU EM ' + esc(FIL.dataPt(p.dia, p.mes).toUpperCase()) + '</div>'
+        + '<div class="nm">' + esc(p.nome) + '</div><div class="st">' + esc((p.s.festa ? "Festa: " : "") + p.s.nome) + '</div>'
+        + (p.s.quem ? '<div class="q">' + esc(p.s.quem) + '</div>' : "") + '<div class="rg">' + esc(invoc(p.s)) + ', rogai por ' + esc(p.nome) + '.</div></div>';
+    }).join("");
+    $("rev-frase").innerHTML = pessoas.length > 1
+      ? "Cada um nasceu no dia de um santo. Agora você sabe quem reza junto com você por <b>" + esc(nomes) + "</b>."
+      : "Agora você sabe quem reza junto com você por <b>" + esc(pessoas[0].nome) + "</b>.";
+    // oferta
+    var temNeto = pessoas.some(function (p) { return p.rel === "neto" || p.rel === "neta"; }), temFilho = pessoas.some(function (p) { return p.rel === "filho" || p.rel === "filha"; });
+    var tit = temNeto && temFilho ? "Novena pelos Filhos e Netos" : temNeto ? "Novena pelos Netos" : "Novena pelos Filhos";
+    $("of-tit-capa").innerHTML = esc(tit).replace(" pelos ", "<br>pelos ");
+    $("of-nomes").textContent = pessoas.map(function (p) { return p.nome; }).join(" · ");
+    $("of-quem").textContent = "com a oração de " + FIL.primeiro(Q.quem.nome);
+    $("of-titulo").textContent = "9 dias rezando por " + nomes + ", pelo nome";
+    $("pr-nomes").textContent = nomes; $("pr-valor").textContent = C.PRECO;
+    var itens = [
+      "<b>9 vídeos narrados</b>, um por dia, de poucos minutos: você aperta o play, reza junto e diz o nome de cada um",
+      "<b>O livro da novena em PDF</b>, com o nome de " + esc(nomes) + " em cada oração, para ler no celular ou imprimir",
+      "<b>O santo de cada um:</b> " + pessoas.map(function (p) { return esc(p.nome) + " (" + esc(p.s.festa ? "festa: " + p.s.nome : p.s.nome) + ")"; }).join(", "),
+      "<b>A oração de cada um</b>, escrita pelo nome, com o que você pede a Deus",
+      "<b>Santa Mônica:</b> a história da mãe que rezou anos pelo filho, e o que ela ensina a quem reza",
+      "<b>Consagração a Nossa Senhora</b> no 9º dia, com o certificado para imprimir",
+      "<b>A bênção:</b> como abençoar cada um, com as palavras certas",
+      "<b>Orações para cada situação:</b> quando sai de casa, numa prova, na doença, na tristeza, no vício, longe da fé, sem trabalho",
+      "<b>Quadro com os nomes</b> e os santos de cada um, para emoldurar",
+      "<b>Um lembrete de manhã</b> no seu e-mail, nos nove dias"
+    ];
+    $("of-itens").innerHTML = itens.map(function (x) { return "<li>" + x + "</li>"; }).join("");
+    if (!C.VENDA_ABERTA) { $("bloco-preco").innerHTML = '<p style="margin:0">As vendas da novena estão pausadas no momento. Volte em breve.</p>'; }
+    mostra("revelacao");
+    FIL.track("Revelou", "ViewContent", { content_name: "Novena pelos Filhos" });
+    if (vsl && !C.VSL_TOPO) vsl.play().catch(function () {});
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { FIL.track("Oferta"); io.disconnect(); } }, { threshold: .4 });
+      io.observe($("bloco-preco"));
+    }
+    FIL.ls("fil_nomes", nomes); FIL.ls("fil_quem", FIL.primeiro(Q.quem.nome));
+    FIL.ls("fil_vivos", JSON.stringify(pessoas.filter(function (p) { return !p.partiu; }).map(function (p) { return p.nome; })));
+  }
+
+  $("comprar").onclick = function () {
+    var b = this; b.disabled = true; b.textContent = "Abrindo o pagamento…"; $("erro-compra").textContent = "";
+    FIL.track("Checkout", "InitiateCheckout", { value: +C.PRECO, currency: "BRL", content_name: "Novena pelos Filhos" });
+    if (vsl) vsl.pause();
+    FIL.api("/api/filhos/pedido", { body: { pedido: Q, origem: FIL.ORIGEM } }, 12000).then(function (j) {
+      if (!j.url) throw new Error(j.detail || j.erro || "sem url");
+      FIL.ls("fil_ref", j.ref);
+      location.href = j.url;
+    }).catch(function () {
+      if (C.CHECKOUT) {  // servidor fora do ar: não perde a venda; depois da compra o e-mail pede os nomes e as datas
+        var q = new URLSearchParams(); Object.keys(FIL.ORIGEM).forEach(function (k) { if (k.indexOf("utm_") === 0 || k === "src") q.set(k, FIL.ORIGEM[k]); });
+        location.href = C.CHECKOUT + (C.CHECKOUT.indexOf("?") > 0 ? "&" : "?") + q.toString(); return;
+      }
+      b.disabled = false; b.textContent = "Tentar de novo";
+      $("erro-compra").textContent = "Não conseguimos abrir o pagamento. Confira a internet e tente de novo.";
+    });
+  };
+})();
+</script>
+</body>
+</html>

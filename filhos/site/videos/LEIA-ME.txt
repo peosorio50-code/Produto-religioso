@@ -1,0 +1,12 @@
+Pasta dos vídeos da Novena pelos Filhos.
+
+Coloque aqui (4:5, 720x900, MP4 H.264, menos de 25 MB cada):
+  vsl.mp4            a VSL da página de vendas
+  dia1.mp4 ... dia9.mp4   os 9 vídeos da novena
+
+E preencha o config.js:
+  VSL_SRC: "videos/vsl.mp4"
+  VIDEOS: { dia1: "videos/dia1.mp4", ..., dia9: "videos/dia9.mp4", terco: "youtube:ID_DO_VIDEO" }
+
+O terço (20 a 25 min) fica melhor no YouTube como "não listado".
+Os roteiros estão no kit, na pasta roteiros/.

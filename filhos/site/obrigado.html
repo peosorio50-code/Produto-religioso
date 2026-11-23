@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pagamento recebido · Novena pelos Filhos</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1636">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script src="config.js"></script>
+<script src="comum.js"></script>
+</head>
+<body>
+<div class="topo">✝ MEU SANTO PROTETOR ✝</div>
+<div class="wrap">
+  <div class="ok-topo">
+    <div class="sel">✅</div>
+    <h1>Pedido recebido!</h1>
+    <p style="margin:0;color:var(--suave)" id="sub">A novena <b id="nomes">dos seus filhos</b> já está sendo preparada.</p>
+  </div>
+
+  <!-- upsell de 1 clique (só aparece com o UPSELL_ID no config.js) -->
+  <div class="cartao upsell escondido" id="upsell">
+    <div class="k">ANTES DE IR · SÓ NESTA PÁGINA</div>
+    <h2 style="text-align:center" id="up-tit">E se cada um recebesse um livro só dele?</h2>
+    <div class="capinhas" id="capinhas"></div>
+    <p>A novena é para <b>você</b> rezar. O <b>Um Livro para Cada Filho</b> é para <b>eles</b>: um PDF para cada um, com o nome na capa, o santo do dia em
+       que nasceu, <b>a oração que você reza por ele</b>, uma oração para ele mesmo rezar, uma bênção e um santinho para recortar.</p>
+    <p style="margin:0">É para mandar pelo WhatsApp com uma mensagem sua, ou imprimir e entregar em mãos. Um presente que diz, sem sermão: <i>eu rezo por você</i>.</p>
+    <div class="preco-up"><b>R$ <span id="up-preco"></span></b>
+      <span style="font-size:14px;color:var(--suave)" id="up-todos">para todos os livros, uma vez só</span></div>
+    <div id="up-botoes"></div>
+    <p style="font-size:13.5px;color:var(--suave);text-align:center;margin:10px 0 0">Com um clique: o pagamento usa o mesmo cartão da compra anterior. Os livros chegam junto com a novena.</p>
+    <div style="text-align:center"><button class="link" id="up-nao">Não, obrigado. Quero ir para a minha novena</button></div>
+  </div>
+
+  <!-- andamento da novena -->
+  <div class="cartao status escondido" id="status">
+    <div id="st-gerando">
+      <div class="spin"></div>
+      <h2>Estamos preparando a sua novena</h2>
+      <p id="st-msg">Leva de 1 a 3 minutos. Pode deixar esta página aberta: quando ficar pronta, o botão aparece aqui. Ela também chega no seu e-mail.</p>
+    </div>
+    <div id="st-pronto" class="escondido">
+      <div style="font-size:38px">🙏</div>
+      <h2>A sua novena está pronta!</h2>
+      <p>Comece hoje pelo 1º dia. Guarde o link: ele também chegou no seu e-mail.</p>
+      <a class="btn" id="ir-area" href="#">Abrir a minha novena (vídeos)</a>
+      <div class="downloads" id="downloads" style="margin-top:12px"></div>
+      <p id="st-mais" class="escondido" style="font-size:14px;color:var(--suave);margin-top:10px">Os extras que você levou estão sendo preparados e aparecem na página da novena em instantes.</p>
+    </div>
+    <div id="st-email" class="escondido">
+      <h2>A novena vai chegar no seu e-mail</h2>
+      <p>Assim que o pagamento for confirmado (no Pix é na hora; no cartão, em alguns minutos), a novena é preparada e o link chega no e-mail que você usou na compra.
+         Confira também a caixa de spam e a aba Promoções.</p>
+      <div class="campo" style="text-align:left"><label for="em">Não chegou em 15 minutos? Peça de novo:</label>
+        <input type="email" id="em" placeholder="o e-mail da compra" autocomplete="email"></div>
+      <button class="btn claro" id="reenviar">Mandar a novena de novo</button>
+      <p id="reenviado" class="escondido" style="margin-top:12px">Pronto! Se houver uma compra com esse e-mail, a novena chega em instantes.</p>
+    </div>
+  </div>
+
+  <p class="transparencia">Dúvidas? Escreva para <a id="contato" href="#"></a>. Material devocional católico do Meu Santo Protetor.</p>
+</div>
+
+<script>
+(function () {
+  var C = FIL.C, $ = function (id) { return document.getElementById(id); }, esc = FIL.esc;
+  FIL.pixel();
+  $("contato").href = "mailto:" + C.CONTATO; $("contato").textContent = C.CONTATO;
+  var q = new URLSearchParams(location.search);
+  var ref = q.get("ref") || FIL.ls("fil_ref") || "";
+  var nomes = FIL.ls("fil_nomes"); if (nomes) $("nomes").textContent = "por " + nomes;
+  var vivos = []; try { vivos = JSON.parse(FIL.ls("fil_vivos") || "[]"); } catch (e) {}
+  var refOk = /^fi-[0-9a-f]{12}$/.test(ref);
+
+  function mostraStatus() {
+    $("upsell").classList.add("escondido"); $("status").classList.remove("escondido");
+    if (!refOk) { $("st-gerando").classList.add("escondido"); $("st-email").classList.remove("escondido"); return; }
+    var n = 0;
+    (function pergunta() {
+      FIL.api("/api/filhos/status?ref=" + ref, {}, 10000).then(function (j) {
+        if (j.pronto && j.area) {
+          $("st-gerando").classList.add("escondido"); $("st-pronto").classList.remove("escondido");
+          $("ir-area").href = j.area;
+          $("downloads").innerHTML = (j.arquivos || []).map(function (a) {
+            return '<a class="btn claro" href="' + esc(a.url) + '" target="_blank" rel="noopener">Baixar: ' + esc(a.titulo) + '</a>'; }).join("");
+          $("st-mais").classList.toggle("escondido", !j.gerando);
+          if (j.gerando && ++n < 75) setTimeout(pergunta, 5000);
+          return;
+        }
+        if (!j.pago && n > 6) $("st-msg").textContent = "Estamos esperando a confirmação do pagamento. No Pix é na hora; no cartão pode levar alguns minutos. Assim que confirmar, a novena aparece aqui e chega no seu e-mail.";
+        if (++n < 75) setTimeout(pergunta, 4000);
+        else { $("st-gerando").classList.add("escondido"); $("st-email").classList.remove("escondido"); }
+      }).catch(function () { if (++n < 75) setTimeout(pergunta, 6000); });
+    })();
+  }
+
+  $("reenviar").onclick = function () {
+    var e = $("em").value.trim(); if (e.indexOf("@") < 1) { $("em").focus(); return; }
+    FIL.api("/api/filhos/reenviar", { body: { email: e } }).finally(function () { $("reenviado").classList.remove("escondido"); });
+  };
+  $("ir-area").onclick = function () { FIL.track("AreaObrigado"); };
+
+  // upsell de 1 clique da Kiwify (Um Livro para Cada Filho)
+  if (C.UPSELL_ID && refOk && vivos.length) {
+    $("up-preco").textContent = C.PRECO_UPSELL;
+    $("up-tit").textContent = vivos.length > 1 ? "E se cada um recebesse um livro só dele?" : "E se " + vivos[0] + " recebesse um livro só dele?";
+    $("up-todos").textContent = vivos.length > 1 ? "pelos " + vivos.length + " livros, uma vez só" : "uma vez só";
+    $("capinhas").innerHTML = vivos.slice(0, 6).map(function (n) { return '<div class="capinha"><small>UM LIVRO PARA</small><b>' + esc(n) + '</b></div>'; }).join("");
+    var h = '<button class="btn azul" id="kiwify-upsell-trigger-' + esc(C.UPSELL_ID) + '">Sim, quero um livro para cada um</button>';
+    if (C.CHECKOUT_UPSELL) h += '<a class="btn claro" style="margin-top:10px" href="' + esc(C.CHECKOUT_UPSELL + (C.CHECKOUT_UPSELL.indexOf("?") > 0 ? "&" : "?") + "sck=" + ref)
+      + '" target="_blank" rel="noopener">Paguei no Pix: quero pagar esta oferta no Pix</a>';
+    $("up-botoes").innerHTML = h;
+    var s = document.createElement("script"); s.src = C.UPSELL_SCRIPT; s.async = true; document.body.appendChild(s);
+    $("upsell").classList.remove("escondido"); FIL.track("Upsell");
+    document.getElementById("kiwify-upsell-trigger-" + C.UPSELL_ID).addEventListener("click", function () {
+      FIL.track("UpsellSim"); this.textContent = "Processando…";
+      setTimeout(mostraStatus, 7000);  // depois do 1 clique, mostra o andamento da novena
+    });
+    $("up-nao").onclick = function () { FIL.track("UpsellNao"); mostraStatus(); window.scrollTo(0, 0); };
+  } else {
+    mostraStatus();
+  }
+})();
+</script>
+</body>
+</html>

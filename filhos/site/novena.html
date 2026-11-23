@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A sua novena · Novena pelos Filhos</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1636">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script src="config.js"></script>
+<script src="comum.js"></script>
+</head>
+<body>
+<div class="topo">✝ MEU SANTO PROTETOR ✝</div>
+<div class="area-topo escondido" id="topo">
+  <div class="wrap">
+    <div class="k" id="a-k">A NOVENA DE</div>
+    <h1 id="a-tit">Novena pelos Filhos</h1>
+    <div class="nomes" id="a-nomes"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cartao" id="carregando"><p style="margin:0;text-align:center">Abrindo a sua novena…</p></div>
+  <div class="cartao escondido" id="invalido"><h2>Link não encontrado</h2>
+    <p>Abra o link do e-mail que mandamos depois da compra. Se não encontrar, escreva para <a class="contato" href="#"></a> com o e-mail da compra.</p></div>
+  <div class="cartao escondido" id="preparando" style="text-align:center"><div class="spin" style="width:36px;height:36px;border-radius:50%;border:4px solid #eadfca;border-top-color:var(--ouro);margin:4px auto 10px;animation:gira 1s linear infinite"></div>
+    <p style="margin:0" id="prep-msg">Estamos terminando de preparar a sua novena. Esta página se atualiza sozinha.</p></div>
+
+  <div id="conteudo" class="escondido">
+    <div class="trilha" id="trilha"></div>
+    <p class="trilha-legenda" id="trilha-leg"></p>
+
+    <div id="dia">
+      <div class="dia-k" id="d-k"></div>
+      <h2 class="dia-tit" id="d-tit"></h2>
+      <div class="player" id="d-player"></div>
+      <p class="leit" id="d-leit"></p>
+      <details class="refl"><summary>Ler a reflexão do dia</summary><p id="d-refl"></p></details>
+      <div class="dia-k" style="margin-top:6px">ORAÇÃO DO DIA</div>
+      <div class="texto-oracao" id="d-oracao"></div>
+      <div class="diga"><small>Diga, em voz alta, o nome de cada um</small><b id="d-nomes"></b></div>
+      <div class="gesto-a"><b>Gesto do dia:</b> <span id="d-gesto"></span></div>
+      <p style="text-align:center;font-size:14px;color:var(--suave)" id="d-fecho"></p>
+      <div id="d-cons" class="escondido"><div class="dia-k" style="margin-top:14px">ATO DE CONSAGRAÇÃO A NOSSA SENHORA</div><div class="texto-oracao" id="d-ato"></div>
+        <p style="text-align:center;font-size:14px;color:var(--suave)">O certificado para imprimir e assinar está no livro (PDF).</p></div>
+      <button class="btn azul" id="rezei"></button>
+      <p id="amanha" class="escondido" style="text-align:center;color:var(--suave);font-size:15px;margin-top:10px"></p>
+    </div>
+
+    <div class="bloco escondido" id="b-terco"><h2>Terço pelos Filhos</h2>
+      <div class="player" id="t-player"></div>
+      <p style="font-size:15px;color:var(--suave);text-align:center">Os mistérios gozosos, com a oferta de cada mistério pelo nome de cada um. O roteiro completo está no PDF.</p>
+      <div id="t-mist"></div></div>
+
+    <div class="bloco escondido" id="b-bencaos"><h2>30 bênçãos para mandar</h2>
+      <p style="font-size:15px;color:var(--suave);text-align:center">Uma por dia. Toque em "WhatsApp" para mandar direto, ou em "Copiar" para colar onde quiser.</p>
+      <div class="abas" id="ab-abas"></div><div id="ab-lista"></div></div>
+
+    <div class="bloco"><h2>Os santos de cada um</h2><div id="santos"></div></div>
+
+    <div class="bloco"><h2>Para baixar</h2>
+      <div class="downloads" id="downloads"></div>
+      <p style="font-size:14px;color:var(--suave);text-align:center;margin-top:10px">PDF para ler no celular ou imprimir em A4.</p></div>
+
+    <p class="transparencia" style="margin-top:28px">Guarde este link: é a sua novena. Dúvidas? Escreva para <a class="contato" href="#"></a>.<br>
+      Material devocional católico do Meu Santo Protetor. Não somos uma paróquia: nada substitui a missa, os sacramentos e a orientação do padre.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var C = FIL.C, esc = FIL.esc, $ = function (id) { return document.getElementById(id); };
+  Array.prototype.forEach.call(document.querySelectorAll(".contato"), function (a) { a.href = "mailto:" + C.CONTATO; a.textContent = C.CONTATO; });
+  var t = new URLSearchParams(location.search).get("t") || "";
+  var V = C.VIDEOS || {}, A = null, atual = 1, chave = "fil_feito_" + t.slice(0, 12);
+  var feitos = []; try { feitos = JSON.parse(FIL.ls(chave) || "[]"); } catch (e) {}
+
+  function player(src, poster) {
+    if (!src) return '<img src="' + poster + '" alt=""><div class="sem">O vídeo deste dia aparece aqui. Enquanto isso, reze pelo texto abaixo.</div>';
+    if (src.indexOf("youtube:") === 0) return '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(src.slice(8)) + '?rel=0&modestbranding=1&playsinline=1" '
+      + 'allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Vídeo"></iframe>';
+    return '<video controls playsinline preload="metadata" poster="' + poster + '" src="' + esc(src) + '"></video>';
+  }
+
+  function trilha() {
+    $("trilha").innerHTML = A.dias.map(function (d) {
+      return '<button type="button" data-n="' + d.n + '" class="' + (feitos.indexOf(d.n) >= 0 ? "feito " : "") + (d.n === atual ? "atual" : "") + '">' + d.n + '</button>';
+    }).join("");
+    Array.prototype.forEach.call($("trilha").querySelectorAll("button"), function (b) { b.onclick = function () { abre(+b.getAttribute("data-n")); }; });
+    $("trilha-leg").textContent = feitos.length >= 9 ? "Você rezou os 9 dias. Que Nossa Senhora cubra cada um com o seu manto. 🙏"
+      : feitos.length ? "Você rezou " + feitos.length + " de 9 dias." : "Comece pelo 1º dia. Leva uns dez minutos.";
+  }
+
+  function abre(n, rolar) {
+    atual = n; var d = A.dias[n - 1];
+    $("d-k").textContent = n + "º DIA DA NOVENA"; $("d-tit").textContent = d.titulo;
+    $("d-player").innerHTML = player(V["dia" + n], "img/dia" + n + ".jpg");
+    $("d-leit").innerHTML = "Leia na sua Bíblia: <b>" + esc(d.leitura) + "</b>";
+    $("d-refl").textContent = d.reflexao; $("d-oracao").textContent = d.oracao; $("d-gesto").textContent = d.gesto; $("d-fecho").textContent = d.fecho;
+    $("d-nomes").textContent = A.pessoas.map(function (p) { return p.nome; }).join(" · ");
+    $("d-cons").classList.toggle("escondido", n !== 9); $("d-ato").textContent = A.consagracao;
+    var ja = feitos.indexOf(n) >= 0;
+    $("rezei").textContent = ja ? "✓ Você já rezou o " + n + "º dia" : "✓ Rezei o " + n + "º dia"; $("rezei").disabled = ja;
+    $("amanha").classList.add("escondido");
+    trilha();
+    if (rolar) $("trilha").scrollIntoView({ behavior: "smooth" });
+    try { history.replaceState(null, "", "#dia" + n); } catch (e) {}
+  }
+
+  $("rezei").onclick = function () {
+    if (feitos.indexOf(atual) < 0) { feitos.push(atual); FIL.ls(chave, JSON.stringify(feitos)); FIL.track("Dia" + atual); }
+    this.textContent = "✓ Você já rezou o " + atual + "º dia"; this.disabled = true; trilha();
+    var prox = A.dias.filter(function (d) { return feitos.indexOf(d.n) < 0; })[0];
+    $("amanha").textContent = prox ? "Que bom. Volte amanhã para o " + prox.n + "º dia: " + prox.titulo + "." : "Você terminou a novena. Que Deus abençoe cada um.";
+    $("amanha").classList.remove("escondido");
+  };
+
+  function bencaos() {
+    var i = 0;
+    function lista() {
+      Array.prototype.forEach.call($("ab-abas").querySelectorAll("button"), function (b, k) { b.classList.toggle("sel", k === i); });
+      $("ab-lista").innerHTML = A.bencaos[i].msgs.map(function (m, k) {
+        return '<div class="msg-b"><p><b style="color:var(--ouro-texto)">' + (k + 1) + '.</b> ' + esc(m) + '</p><div class="acoes-b">'
+          + '<button type="button" class="copiar" data-k="' + k + '">Copiar</button>'
+          + '<a class="zap" href="https://wa.me/?text=' + encodeURIComponent(m + " 🙏") + '" target="_blank" rel="noopener">WhatsApp</a></div></div>';
+      }).join("");
+      Array.prototype.forEach.call($("ab-lista").querySelectorAll(".copiar"), function (b) {
+        b.onclick = function () {
+          var txt = A.bencaos[i].msgs[+b.getAttribute("data-k")] + " 🙏";
+          (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () { b.textContent = "Copiado ✓"; }, function () { window.prompt("Copie a mensagem:", txt); });
+        };
+      });
+    }
+    $("ab-abas").innerHTML = A.bencaos.map(function (x) { return '<button type="button">' + esc(x.nome) + '</button>'; }).join("");
+    Array.prototype.forEach.call($("ab-abas").querySelectorAll("button"), function (b, k) { b.onclick = function () { i = k; lista(); }; });
+    lista(); $("b-bencaos").classList.remove("escondido");
+  }
+
+  var montado = false, tercoFeito = false, bencaosFeito = false;
+  function monta() {
+    $("topo").classList.remove("escondido"); $("conteudo").classList.remove("escondido");
+    $("a-k").textContent = ("A novena de " + A.quem).toUpperCase(); $("a-tit").textContent = A.titulo;
+    $("a-nomes").textContent = A.pessoas.map(function (p) { return p.nome; }).join(" · ");
+    $("santos").innerHTML = A.pessoas.map(function (p) {
+      return '<div class="mini-santo"><div class="nm">' + esc(p.nome) + '</div><div class="st">' + esc((p.festa ? "Festa: " : "") + p.santo) + ' · ' + esc(p.data) + '</div>'
+        + (p.santo_texto ? '<p>' + esc(p.santo_texto) + '</p>' : "")
+        + (p.oracao ? '<details class="refl" style="margin:0"><summary>A oração por ' + esc(p.nome) + '</summary><p>' + esc(p.oracao) + '</p></details>' : "") + '</div>';
+    }).join("");
+    $("downloads").innerHTML = A.arquivos.map(function (a, i) {
+      return '<a class="btn ' + (i ? "claro" : "azul") + '" href="' + esc(a.url) + '" target="_blank" rel="noopener">Baixar: ' + esc(a.titulo) + '</a>'; }).join("")
+      || '<p style="text-align:center;color:var(--suave)">Os arquivos aparecem aqui em instantes.</p>';
+    if (A.terco && !tercoFeito) {
+      tercoFeito = true;
+      $("t-player").innerHTML = player(V.terco, "img/terco.jpg");
+      $("t-mist").innerHTML = A.terco.map(function (m) { return '<div class="mini-santo"><div class="st">' + esc(m.titulo) + '</div><p>' + esc(m.meditacao) + '</p><p><i>' + esc(m.oferta) + '</i></p></div>'; }).join("");
+      $("b-terco").classList.remove("escondido");
+    }
+    if (A.bencaos && !bencaosFeito) { bencaosFeito = true; bencaos(); }
+    if (montado) return;
+    montado = true;
+    var h = /^#dia([1-9])$/.exec(location.hash);
+    var primeiro = A.dias.filter(function (d) { return feitos.indexOf(d.n) < 0; })[0];
+    abre(h ? +h[1] : (primeiro ? primeiro.n : 9));
+  }
+
+  var tentativas = 0;
+  function carrega() {
+    FIL.api("/api/filhos/area?t=" + encodeURIComponent(t), {}, 12000).then(function (j) {
+      $("carregando").classList.add("escondido");
+      if (!j.ok) { $("invalido").classList.remove("escondido"); return; }
+      if (j.precisa_dados) { location.href = j.dados; return; }
+      A = j;
+      if (!j.pronto) { $("preparando").classList.remove("escondido"); if (++tentativas < 60) setTimeout(carrega, 5000); return; }
+      $("preparando").classList.toggle("escondido", !(j.gerando && j.gerando.length));
+      if (j.gerando && j.gerando.length) { $("prep-msg").textContent = "Os extras que você levou estão sendo preparados e aparecem aqui em instantes."; if (++tentativas < 60) setTimeout(carrega, 6000); }
+      if (!montado) FIL.track("Area");
+      monta();
+    }).catch(function () {
+      if (++tentativas < 5) return setTimeout(carrega, 4000);
+      $("carregando").classList.add("escondido"); $("invalido").classList.remove("escondido");
+    });
+  }
+  if (!/^[A-Za-z0-9_-]{16,40}$/.test(t)) { $("carregando").classList.add("escondido"); $("invalido").classList.remove("escondido"); }
+  else carrega();
+})();
+</script>
+</body>
+</html>

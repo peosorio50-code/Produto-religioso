@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Capas dos vídeos da Novena pelos Filhos</title>
+<link rel="stylesheet" href="base.css"><script src="svg.js"></script>
+<style>
+body { padding: 20px; }
+.p45 { width: 720px; height: 900px; }
+.p45 .num { position: absolute; top: 120px; left: 0; right: 0; text-align: center; font-family: 'Cinzel'; font-size: 26px; letter-spacing: .3em; color: var(--ouro2); }
+.p45 .ic { position: absolute; top: 210px; left: 0; right: 0; text-align: center; }
+.p45 .tit { position: absolute; top: 480px; left: 60px; right: 60px; text-align: center; font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 60px; line-height: 1.08; color: #fff7e6; }
+.p45 .rod { position: absolute; bottom: 70px; left: 0; right: 0; text-align: center; font-family: 'Cinzel'; font-size: 18px; letter-spacing: .32em; color: #C9A052; }
+.p45.moldura::before { inset: 22px; }
+.play { position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 50%; background: rgba(201,160,82,.92);
+        box-shadow: 0 10px 40px rgba(0,0,0,.4); }
+.play::after { content: ""; position: absolute; left: 58px; top: 44px; border-left: 50px solid #0B1636; border-top: 31px solid transparent; border-bottom: 31px solid transparent; }
+</style></head><body>
+<div id="lista"></div>
+<script>
+var DIAS = [["coracao", "Os filhos que Deus me confiou"], ["vela", "A oração que não desiste"], ["chama", "A fé que passa de geração em geração"],
+            ["estrela", "Proteção: os anjos da guarda"], ["folha", "Saúde do corpo, da mente e do coração"], ["casa", "O filho que está longe"],
+            ["livro", "Trabalho, estudos e o futuro"], ["pomba", "Paz em casa e união entre irmãos"], ["manto", "Debaixo do manto de Maria"]];
+var h = DIAS.map(function (d, i) {
+  return '<div class="peca p45 escuro moldura" id="p-dia' + (i + 1) + '"><div class="num">' + (i + 1) + 'º DIA</div><div class="ic" data-svg="' + d[0] + ',230,#E9CF93"></div>'
+    + '<div class="tit">' + d[1] + '</div><div class="rod">NOVENA PELOS FILHOS</div></div>';
+}).join("");
+h += '<div class="peca p45 escuro moldura" id="p-terco"><div class="num">TERÇO PELOS FILHOS</div><div class="ic" data-svg="rosario,230,#E9CF93"></div>'
+   + '<div class="tit">Os mistérios gozosos, pelo nome de cada um</div><div class="rod">MEU SANTO PROTETOR</div></div>';
+h += '<div class="peca p45 escuro moldura" id="p-vsl-capa"><div class="num">NOVENA PELOS FILHOS</div><div class="ic" style="top:180px" data-svg="manto,260,#E9CF93"></div>'
+   + '<div class="play"></div><div class="tit" style="top:560px;font-size:54px">Veja como é a novena<br>por dentro</div><div class="rod">TOQUE PARA ASSISTIR</div></div>';
+document.getElementById("lista").innerHTML = h; SVG.pinta();
+</script>
+</body></html>

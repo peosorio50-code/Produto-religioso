@@ -1035,7 +1035,8 @@ app = FastAPI(title="Mapa da Alma", docs_url=None, redoc_url=None)
 origens = {CFG["SITE_URL"], CFG["SITE_URL"].replace("https://", "https://www.")}
 if CFG["SITE_URL_SANTO"]:
     origens |= {CFG["SITE_URL_SANTO"].rstrip("/"), CFG["SITE_URL_SANTO"].rstrip("/").replace("https://", "https://www.")}
-for _u in (CFG["SITE_URL_PROMESSA"], CFG["FOLEGO_SITE"], os.environ.get("CASAMENTO_SITE", "https://casamento.meusantoprotetor.online")):
+for _u in (CFG["SITE_URL_PROMESSA"], CFG["FOLEGO_SITE"], os.environ.get("CASAMENTO_SITE", "https://casamento.meusantoprotetor.online"),
+           os.environ.get("FILHOS_SITE", "https://filhos.meusantoprotetor.online")):
     if _u:
         origens |= {_u.rstrip("/"), _u.rstrip("/").replace("https://", "https://www.")}
 app.add_middleware(CORSMiddleware, allow_origins=list(origens) + ["null"], allow_origin_regex=r"https://.*\.pages\.dev",
@@ -1046,6 +1047,12 @@ import folego as _folego  # noqa: E402  (rotas do Fôlego: folegofinanceiro.shop
 app.include_router(_folego.router)
 import casamento as _casamento  # noqa: E402  (O Santo do Nosso Casamento: casamento.py, tabelas casamento_*)
 app.include_router(_casamento.router)
+try:  # Novena pelos Filhos: filhos.py, tabelas filhos_*. Se o módulo faltar ou quebrar, o resto do servidor sobe normalmente
+    import filhos as _filhos  # noqa: E402
+    app.include_router(_filhos.router)
+except Exception:
+    _filhos = None
+    log.exception("filhos: módulo não carregou (as vendas da Novena pelos Filhos não serão entregues)")
 
 
 @app.on_event("startup")
@@ -1065,6 +1072,11 @@ def _iniciar():
         _casamento.iniciar()
     except Exception:
         log.exception("casamento: não iniciou")
+    try:
+        if _filhos:
+            _filhos.iniciar()
+    except Exception:
+        log.exception("filhos: não iniciou")
     try:
         import clube
         clube.iniciar()
@@ -1157,6 +1169,15 @@ async def webhook(segredo: str, request: Request):
             log.exception("casamento: webhook falhou para %s", email); alerta_admin("Casamento: webhook falhou", traceback.format_exc())
             raise HTTPException(500)  # a Kiwify manda de novo; o evento_kiwify pode rodar duas vezes sem duplicar
         nomes_produtos = [n for n in nomes_produtos if not _casamento.eh_casamento([n])]
+        if not nomes_produtos:
+            return {"ok": True}
+    if _filhos and _filhos.eh_filhos(nomes_produtos):  # Novena pelos Filhos (bumps e upsell): tabelas e e-mails próprios (filhos.py)
+        try:
+            _filhos.evento_kiwify(p, status, email, nomes_produtos)
+        except Exception:
+            log.exception("filhos: webhook falhou para %s", email); alerta_admin("Novena pelos Filhos: webhook falhou", traceback.format_exc())
+            raise HTTPException(500)  # a Kiwify manda de novo; o evento_kiwify pode rodar duas vezes sem duplicar
+        nomes_produtos = [n for n in nomes_produtos if not _filhos.eh_filhos([n])]
         if not nomes_produtos:
             return {"ok": True}
     if _folego.eh_folego(nomes_produtos):  # Fôlego: outro nicho, outro banco, outros e-mails (folego.py)
